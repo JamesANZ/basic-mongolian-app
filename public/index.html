@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mongolian Learning App</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>🇲🇳 Mongolian Learning App</h1>
+        <p>
+          Learn the Mongolian alphabet, numbers, and essential travel phrases
+        </p>
+      </header>
+
+      <nav class="navigation">
+        <button class="nav-btn active" data-section="alphabet">Alphabet</button>
+        <button class="nav-btn" data-section="numbers">Numbers</button>
+        <button class="nav-btn" data-section="words">Basic Words</button>
+        <button class="nav-btn" data-section="travel-phrases">
+          Travel Phrases
+        </button>
+        <button class="nav-btn" data-section="verbs">Essential Verbs</button>
+        <button class="nav-btn" data-section="travel-vocab">
+          Travel Vocabulary
+        </button>
+        <button class="nav-btn" data-section="quiz">Quiz</button>
+      </nav>
+
+      <main class="main-content">
+        <!-- Alphabet Section -->
+        <section id="alphabet" class="content-section active">
+          <h2>Mongolian Cyrillic Alphabet</h2>
+          <div class="alphabet-grid" id="alphabetGrid">
+            <!-- Alphabet cards will be populated by JavaScript -->
+          </div>
+        </section>
+
+        <!-- Numbers Section -->
+        <section id="numbers" class="content-section">
+          <h2>Counting in Mongolian (1-20)</h2>
+          <div class="numbers-grid" id="numbersGrid">
+            <!-- Number cards will be populated by JavaScript -->
+          </div>
+        </section>
+
+        <!-- Basic Words Section -->
+        <section id="words" class="content-section">
+          <h2>Basic Mongolian Words</h2>
+          <div class="words-grid" id="wordsGrid">
+            <!-- Word cards will be populated by JavaScript -->
+          </div>
+        </section>
+
+        <!-- Travel Phrases Section -->
+        <section id="travel-phrases" class="content-section">
+          <h2>Essential Travel Phrases</h2>
+          <p class="section-description">
+            Essential phrases for travelers in Mongolia
+          </p>
+          <div class="phrases-grid" id="travelPhrasesGrid">
+            <!-- Travel phrase cards will be populated by JavaScript -->
+          </div>
+        </section>
+
+        <!-- Essential Verbs Section -->
+        <section id="verbs" class="content-section">
+          <h2>Essential Mongolian Verbs</h2>
+          <p class="section-description">
+            Learn common verbs with their conjugations
+          </p>
+          <div class="verbs-grid" id="verbsGrid">
+            <!-- Verb cards will be populated by JavaScript -->
+          </div>
+        </section>
+
+        <!-- Travel Vocabulary Section -->
+        <section id="travel-vocab" class="content-section">
+          <h2>Travel Vocabulary</h2>
+          <p class="section-description">
+            Essential words for traveling in Mongolia
+          </p>
+          <div class="vocab-grid" id="travelVocabGrid">
+            <!-- Vocabulary cards will be populated by JavaScript -->
+          </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="content-section">
+          <h2>Test Your Knowledge</h2>
+          <div class="quiz-container">
+            <div class="quiz-controls">
+              <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+              <button
+                id="nextQuestion"
+                class="btn btn-secondary"
+                style="display: none"
+              >
+                Next Question
+              </button>
+            </div>
+            <div id="quizQuestion" class="quiz-question" style="display: none">
+              <h3 id="questionText"></h3>
+              <div id="quizOptions" class="quiz-options">
+                <!-- Quiz options will be populated by JavaScript -->
+              </div>
+              <div id="quizResult" class="quiz-result" style="display: none">
+                <p id="resultText"></p>
+              </div>
+            </div>
+            <div id="quizScore" class="quiz-score" style="display: none">
+              <h3>Quiz Complete!</h3>
+              <p>Your score: <span id="scoreDisplay"></span></p>
+              <button id="restartQuiz" class="btn btn-primary">
+                Try Again
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>🇲🇳 Learn Mongolian with interactive lessons and quizzes</p>
+      </footer>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
