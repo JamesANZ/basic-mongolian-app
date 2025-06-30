@@ -108,14 +108,20 @@ body {
 }
 
 .alphabet-card {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
   padding: 20px;
-  border-radius: 15px;
   text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .alphabet-card:hover {
@@ -124,49 +130,94 @@ body {
 }
 
 .alphabet-card .letter {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 10px;
-  display: block;
+  color: #2c3e50;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .alphabet-card .pronunciation {
-  font-size: 1.2rem;
-  margin-bottom: 8px;
-  opacity: 0.9;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #34495e;
 }
 
 .alphabet-card .ipa {
   font-size: 0.8rem;
-  opacity: 0.7;
+  opacity: 0.8;
   font-family: "Arial Unicode MS", sans-serif;
   margin-bottom: 8px;
-  color: #e8f4fd;
+  color: #7f8c8d;
 }
 
 .alphabet-card .example {
   font-size: 0.9rem;
-  opacity: 0.8;
+  color: #7f8c8d;
+  font-family: "Arial Unicode MS", sans-serif;
+  margin-bottom: 8px;
+  font-style: italic;
   line-height: 1.4;
+}
+
+/* Card image styles */
+.card-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Emoji fallback for images */
+.card-image.emoji {
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 12px;
 }
 
 /* Numbers Grid */
 .numbers-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
+  gap: 20px;
   margin-top: 20px;
 }
 
 .number-card {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
   padding: 20px;
-  border-radius: 15px;
   text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .number-card:hover {
@@ -177,52 +228,63 @@ body {
 .number-card .number {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 8px;
-  display: block;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .number-card .mongolian {
-  font-size: 1.3rem;
-  margin-bottom: 5px;
+  font-size: 1.2rem;
   font-weight: 600;
+  margin-bottom: 8px;
+  color: #34495e;
 }
 
 .number-card .pronunciation {
   font-size: 1rem;
   margin-bottom: 5px;
-  opacity: 0.9;
+  color: #34495e;
 }
 
 .number-card .ipa {
   font-size: 0.8rem;
-  opacity: 0.7;
+  opacity: 0.8;
   font-family: "Arial Unicode MS", sans-serif;
   margin-bottom: 5px;
-  color: #e8f4fd;
+  color: #7f8c8d;
 }
 
 .number-card .english {
   font-size: 0.9rem;
-  opacity: 0.8;
+  color: #7f8c8d;
+  font-family: "Arial Unicode MS", sans-serif;
+  margin-bottom: 8px;
+  font-style: italic;
 }
 
 /* Words Grid */
 .words-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   margin-top: 20px;
 }
 
 .word-card {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  color: #333;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
   padding: 20px;
-  border-radius: 15px;
   text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .word-card:hover {
@@ -231,50 +293,57 @@ body {
 }
 
 .word-card .mongolian {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 8px;
   color: #2c3e50;
 }
 
 .word-card .pronunciation {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: #7f8c8d;
-  font-style: italic;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #34495e;
 }
 
 .word-card .ipa {
   font-size: 0.8rem;
-  color: #95a5a6;
+  color: #7f8c8d;
   font-family: "Arial Unicode MS", sans-serif;
   margin-bottom: 8px;
   font-style: italic;
 }
 
 .word-card .english {
-  font-size: 1rem;
-  color: #34495e;
-  font-weight: 500;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  font-family: "Arial Unicode MS", sans-serif;
+  margin-bottom: 8px;
+  font-style: italic;
 }
 
 /* Travel Phrases Grid */
 .phrases-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   margin-top: 20px;
 }
 
 .phrase-card {
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-  color: #333;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
   padding: 20px;
-  border-radius: 15px;
   text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .phrase-card:hover {
@@ -283,31 +352,32 @@ body {
 }
 
 .phrase-card .mongolian {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 8px;
   color: #2c3e50;
 }
 
 .phrase-card .pronunciation {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: #7f8c8d;
-  font-style: italic;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #34495e;
 }
 
 .phrase-card .ipa {
   font-size: 0.8rem;
-  color: #95a5a6;
+  color: #7f8c8d;
   font-family: "Arial Unicode MS", sans-serif;
   margin-bottom: 8px;
   font-style: italic;
 }
 
 .phrase-card .english {
-  font-size: 1rem;
-  color: #34495e;
-  font-weight: 500;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  font-family: "Arial Unicode MS", sans-serif;
+  margin-bottom: 8px;
+  font-style: italic;
 }
 
 /* Verbs Grid */
@@ -319,14 +389,20 @@ body {
 }
 
 .verb-card {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  color: #333;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
   padding: 20px;
-  border-radius: 15px;
   text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .verb-card:hover {
@@ -335,72 +411,74 @@ body {
 }
 
 .verb-card .mongolian {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 8px;
   color: #2c3e50;
 }
 
 .verb-card .pronunciation {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: #7f8c8d;
-  font-style: italic;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #34495e;
 }
 
 .verb-card .ipa {
   font-size: 0.8rem;
-  color: #95a5a6;
+  color: #7f8c8d;
   font-family: "Arial Unicode MS", sans-serif;
   margin-bottom: 8px;
   font-style: italic;
 }
 
 .verb-card .english {
-  font-size: 1.1rem;
-  color: #34495e;
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  font-family: "Arial Unicode MS", sans-serif;
+  margin-bottom: 8px;
+  font-style: italic;
 }
 
 .verb-card .conjugations {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #7f8c8d;
-  line-height: 1.4;
+  font-family: "Arial Unicode MS", sans-serif;
+  margin-bottom: 8px;
+  font-style: italic;
 }
 
-.verb-card .conjugations .present {
-  color: #27ae60;
-  font-weight: 500;
+.verb-card .conjugations div {
+  margin-bottom: 3px;
 }
 
-.verb-card .conjugations .past {
-  color: #e74c3c;
-  font-weight: 500;
+.verb-card .conjugations strong {
+  color: #2c3e50;
+  font-weight: 600;
 }
 
-.verb-card .conjugations .future {
-  color: #3498db;
-  font-weight: 500;
-}
-
-/* Travel Vocabulary Grid */
+/* Vocabulary Grid */
 .vocab-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
+  gap: 20px;
   margin-top: 20px;
 }
 
 .vocab-card {
-  background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
-  color: #333;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
   padding: 20px;
-  border-radius: 15px;
   text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .vocab-card:hover {
@@ -409,7 +487,7 @@ body {
 }
 
 .vocab-card .mongolian {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 8px;
   color: #2c3e50;
@@ -417,23 +495,24 @@ body {
 
 .vocab-card .pronunciation {
   font-size: 1rem;
-  margin-bottom: 8px;
-  color: #7f8c8d;
-  font-style: italic;
+  margin-bottom: 5px;
+  color: #34495e;
 }
 
 .vocab-card .ipa {
   font-size: 0.8rem;
-  color: #95a5a6;
+  color: #7f8c8d;
   font-family: "Arial Unicode MS", sans-serif;
   margin-bottom: 8px;
   font-style: italic;
 }
 
 .vocab-card .english {
-  font-size: 1rem;
-  color: #34495e;
-  font-weight: 500;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  font-family: "Arial Unicode MS", sans-serif;
+  margin-bottom: 8px;
+  font-style: italic;
 }
 
 /* Quiz Styles */

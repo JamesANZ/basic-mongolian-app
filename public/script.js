@@ -3,7 +3,7 @@ let mongolianData = null;
 let currentQuiz = null;
 let quizScore = 0;
 let currentQuestionIndex = 0;
-let spanishVoice = null;
+let preferredVoice = null;
 
 // DOM elements
 const navButtons = document.querySelectorAll(".nav-btn");
@@ -83,7 +83,7 @@ function findSpanishVoice(voices) {
   );
 
   if (spanishVoice) {
-    spanishVoice = spanishVoice;
+    preferredVoice = spanishVoice;
     console.log(
       `Using Spanish voice: ${spanishVoice.name} (${spanishVoice.lang})`,
     );
@@ -134,7 +134,12 @@ function renderAlphabet() {
   mongolianData.alphabet.cyrillic.forEach((letter) => {
     const card = document.createElement("div");
     card.className = "alphabet-card";
+    
+    // Get emoji based on the example word
+    const emoji = getAlphabetEmoji(letter.example);
+    
     card.innerHTML = `
+            <div class="card-image emoji">${emoji}</div>
             <span class="letter">${letter.letter}</span>
             <div class="pronunciation">${letter.pronunciation}</div>
             ${letter.ipa ? `<div class="ipa">[${letter.ipa}]</div>` : ""}
@@ -150,6 +155,48 @@ function renderAlphabet() {
   });
 }
 
+// Helper function to get emoji for alphabet letters
+function getAlphabetEmoji(example) {
+  const emojiMap = {
+    'Gold': '🥇',
+    'Place': '🏠',
+    'King': '👑',
+    'House': '🏠',
+    'Upper': '⬆️',
+    'General': '🎖️',
+    'Custom': '📜',
+    'Happiness': '😊',
+    'Distance': '📏',
+    'Big': '🐘',
+    'Weapon': '⚔️',
+    'Movie': '🎬',
+    'Monk': '🧘',
+    'Livestock': '🐄',
+    'Book': '📚',
+    'Palace': '🏰',
+    'Park': '🌳',
+    'Radio': '📻',
+    'Beautiful': '🌸',
+    'Sky': '☁️',
+    'Red': '🔴',
+    'Price': '💰',
+    'Factory': '🏭',
+    'Person': '👤',
+    'White': '⚪',
+    'Stone': '🪨',
+    'Yellow': '🟡',
+    'Sorrel': '🌿',
+    'Yes': '✅',
+    'Goat': '🐐',
+    'Jewel': '💎',
+    'Thing': '📦',
+  };
+  
+  // Extract the English word from the example
+  const englishWord = example.split(' - ')[1];
+  return emojiMap[englishWord] || '🔤';
+}
+
 // Render numbers section
 function renderNumbers() {
   if (!mongolianData?.numbers) return;
@@ -158,7 +205,12 @@ function renderNumbers() {
   mongolianData.numbers.forEach((number) => {
     const card = document.createElement("div");
     card.className = "number-card";
+    
+    // Get emoji for the number
+    const emoji = getNumberEmoji(number.number);
+    
     card.innerHTML = `
+            <div class="card-image emoji">${emoji}</div>
             <span class="number">${number.number}</span>
             <div class="mongolian">${number.mongolian}</div>
             <div class="pronunciation">${number.pronunciation}</div>
@@ -175,6 +227,33 @@ function renderNumbers() {
   });
 }
 
+// Helper function to get emoji for numbers
+function getNumberEmoji(number) {
+  const emojiMap = {
+    1: '1️⃣',
+    2: '2️⃣',
+    3: '3️⃣',
+    4: '4️⃣',
+    5: '5️⃣',
+    6: '6️⃣',
+    7: '7️⃣',
+    8: '8️⃣',
+    9: '9️⃣',
+    10: '🔟',
+    11: '1️⃣1️⃣',
+    12: '1️⃣2️⃣',
+    13: '1️⃣3️⃣',
+    14: '1️⃣4️⃣',
+    15: '1️⃣5️⃣',
+    16: '1️⃣6️⃣',
+    17: '1️⃣7️⃣',
+    18: '1️⃣8️⃣',
+    19: '1️⃣9️⃣',
+    20: '2️⃣0️⃣',
+  };
+  return emojiMap[number] || '🔢';
+}
+
 // Render words section
 function renderWords() {
   if (!mongolianData?.basicWords) return;
@@ -183,7 +262,12 @@ function renderWords() {
   mongolianData.basicWords.forEach((word) => {
     const card = document.createElement("div");
     card.className = "word-card";
+    
+    // Get emoji based on the English meaning
+    const emoji = getWordEmoji(word.english);
+    
     card.innerHTML = `
+            <div class="card-image emoji">${emoji}</div>
             <div class="mongolian">${word.mongolian}</div>
             <div class="pronunciation">${word.pronunciation}</div>
             ${word.ipa ? `<div class="ipa">[${word.ipa}]</div>` : ""}
@@ -199,6 +283,28 @@ function renderWords() {
   });
 }
 
+// Helper function to get emoji for basic words
+function getWordEmoji(english) {
+  const emojiMap = {
+    'Hello/How are you?': '👋',
+    'Goodbye': '👋',
+    'Thank you': '🙏',
+    'Yes': '✅',
+    'No': '❌',
+    'Sorry/Excuse me': '🙏',
+    'I/Me': '👤',
+    'You (formal)': '👤',
+    'You (informal)': '👤',
+    'Water': '💧',
+    'Food': '🍽️',
+    'House/Yurt': '🏠',
+    'Livestock': '🐄',
+    'Sky': '☁️',
+    'Earth': '🌍',
+  };
+  return emojiMap[english] || '📝';
+}
+
 // Render travel phrases section
 function renderTravelPhrases() {
   if (!mongolianData?.travelPhrases) return;
@@ -207,7 +313,12 @@ function renderTravelPhrases() {
   mongolianData.travelPhrases.forEach((phrase) => {
     const card = document.createElement("div");
     card.className = "phrase-card";
+    
+    // Get emoji based on the English meaning
+    const emoji = getTravelPhraseEmoji(phrase.english);
+    
     card.innerHTML = `
+            <div class="card-image emoji">${emoji}</div>
             <div class="mongolian">${phrase.mongolian}</div>
             <div class="pronunciation">${phrase.pronunciation}</div>
             ${phrase.ipa ? `<div class="ipa">[${phrase.ipa}]</div>` : ""}
@@ -223,6 +334,40 @@ function renderTravelPhrases() {
   });
 }
 
+// Helper function to get emoji for travel phrases
+function getTravelPhraseEmoji(english) {
+  const emojiMap = {
+    'Hello/How are you?': '👋',
+    'Goodbye': '👋',
+    'Thank you': '🙏',
+    'Sorry/Excuse me': '🙏',
+    "I don't understand": '🤔',
+    'Do you speak English?': '🗣️',
+    'I am a foreigner': '🌍',
+    'I am traveling': '✈️',
+    'How much is this?': '💰',
+    "It's too expensive": '💸',
+    'Is it cheap?': '💵',
+    'Where is it?': '📍',
+    'Where is this?': '📍',
+    'I am going': '🚶',
+    'I am coming': '🏃',
+    'I am sitting': '🪑',
+    'I am carrying': '📦',
+    'I am looking': '👀',
+    'I am listening': '👂',
+    'I am eating': '🍽️',
+    'I am drinking': '🥤',
+    'I am sleeping': '😴',
+    'I am working': '💼',
+    'I am studying': '📚',
+    'I am playing': '🎮',
+    'I am singing': '🎤',
+    'I am dancing': '💃',
+  };
+  return emojiMap[english] || '🗣️';
+}
+
 // Render verbs section
 function renderVerbs() {
   if (!mongolianData?.essentialVerbs) return;
@@ -231,15 +376,20 @@ function renderVerbs() {
   mongolianData.essentialVerbs.forEach((verb) => {
     const card = document.createElement("div");
     card.className = "verb-card";
+    
+    // Get emoji based on the English meaning
+    const emoji = getVerbEmoji(verb.english);
+    
     card.innerHTML = `
+            <div class="card-image emoji">${emoji}</div>
             <div class="mongolian">${verb.mongolian}</div>
             <div class="pronunciation">${verb.pronunciation}</div>
             ${verb.ipa ? `<div class="ipa">[${verb.ipa}]</div>` : ""}
             <div class="english">${verb.english}</div>
             <div class="conjugations">
-                <div class="present">Present: ${verb.present}</div>
-                <div class="past">Past: ${verb.past}</div>
-                <div class="future">Future: ${verb.future}</div>
+                <div><strong>Present:</strong> ${verb.present}</div>
+                <div><strong>Past:</strong> ${verb.past}</div>
+                <div><strong>Future:</strong> ${verb.future}</div>
             </div>
         `;
 
@@ -252,6 +402,32 @@ function renderVerbs() {
   });
 }
 
+// Helper function to get emoji for verbs
+function getVerbEmoji(english) {
+  const emojiMap = {
+    'To go': '🚶',
+    'To come': '🏃',
+    'To sit': '🪑',
+    'To carry': '📦',
+    'To look': '👀',
+    'To listen': '👂',
+    'To eat': '🍽️',
+    'To drink': '🥤',
+    'To sleep': '😴',
+    'To work': '💼',
+    'To study': '📚',
+    'To play': '🎮',
+    'To sing': '🎤',
+    'To dance': '💃',
+    'To write': '✍️',
+    'To read': '📖',
+    'To speak': '🗣️',
+    'To understand': '🧠',
+    'To want': '💭',
+  };
+  return emojiMap[english] || '⚡';
+}
+
 // Render travel vocabulary section
 function renderTravelVocabulary() {
   if (!mongolianData?.travelVocabulary) return;
@@ -260,7 +436,12 @@ function renderTravelVocabulary() {
   mongolianData.travelVocabulary.forEach((vocab) => {
     const card = document.createElement("div");
     card.className = "vocab-card";
+    
+    // Get emoji based on the English meaning
+    const emoji = getTravelVocabEmoji(vocab.english);
+    
     card.innerHTML = `
+            <div class="card-image emoji">${emoji}</div>
             <div class="mongolian">${vocab.mongolian}</div>
             <div class="pronunciation">${vocab.pronunciation}</div>
             ${vocab.ipa ? `<div class="ipa">[${vocab.ipa}]</div>` : ""}
@@ -276,6 +457,49 @@ function renderTravelVocabulary() {
   });
 }
 
+// Helper function to get emoji for travel vocabulary
+function getTravelVocabEmoji(english) {
+  const emojiMap = {
+    'Hotel': '🏨',
+    'Restaurant': '🍽️',
+    'Food': '🍽️',
+    'Water': '💧',
+    'Tea': '🍵',
+    'Coffee': '☕',
+    'Money': '💰',
+    'Tugrik (currency)': '💱',
+    'Price': '💰',
+    'Cheap': '💵',
+    'Expensive': '💸',
+    'Market': '🛒',
+    'Shop': '🏪',
+    'Hospital': '🏥',
+    'Medicine': '💊',
+    'Bus': '🚌',
+    'Taxi': '🚕',
+    'Airplane': '✈️',
+    'Train': '🚂',
+    'Road': '🛣️',
+    'Where': '📍',
+    'When': '🕐',
+    'Why': '❓',
+    'What': '❓',
+    'Who': '👤',
+    'How': '❓',
+    'How many': '🔢',
+    'How much': '💰',
+    'This': '👉',
+    'That': '👉',
+    'Here': '📍',
+    'There': '📍',
+    'Now': '⏰',
+    'Yesterday': '📅',
+    'Tomorrow': '📅',
+    'Today': '📅',
+  };
+  return emojiMap[english] || '📝';
+}
+
 // Render romantic phrases section
 function renderRomanticPhrases() {
   if (!mongolianData?.romanticPhrases) return;
@@ -284,7 +508,12 @@ function renderRomanticPhrases() {
   mongolianData.romanticPhrases.forEach((phrase) => {
     const card = document.createElement("div");
     card.className = "phrase-card";
+    
+    // Get emoji based on the English meaning
+    const emoji = getRomanticPhraseEmoji(phrase.english);
+    
     card.innerHTML = `
+            <div class="card-image emoji">${emoji}</div>
             <div class="mongolian">${phrase.mongolian}</div>
             <div class="pronunciation">${phrase.pronunciation}</div>
             ${phrase.ipa ? `<div class="ipa">[${phrase.ipa}]</div>` : ""}
@@ -300,6 +529,28 @@ function renderRomanticPhrases() {
   });
 }
 
+// Helper function to get emoji for romantic phrases
+function getRomanticPhraseEmoji(english) {
+  const emojiMap = {
+    'I love you': '💕',
+    'You are my love': '💖',
+    'You look beautiful': '🌸',
+    'I want you': '💭',
+    'You are my everything': '💝',
+    'I can smell you': '👃',
+    'You are my desire': '🔥',
+    'I want to touch you': '🤗',
+    'You are my person': '👫',
+    'I am kissing you': '💋',
+    'You are my life': '💗',
+    'I respect you': '🙏',
+    'You are my heart': '💓',
+    'I cherish you': '💞',
+    'You are my happiness': '😊',
+  };
+  return emojiMap[english] || '💕';
+}
+
 // Text-to-speech function optimized for Spanish voice
 function speakText(text, description = "") {
   if ("speechSynthesis" in window) {
@@ -309,9 +560,9 @@ function speakText(text, description = "") {
     const utterance = new SpeechSynthesisUtterance(text);
 
     // Use Spanish voice if available
-    if (spanishVoice) {
-      utterance.voice = spanishVoice;
-      utterance.lang = spanishVoice.lang;
+    if (preferredVoice) {
+      utterance.voice = preferredVoice;
+      utterance.lang = preferredVoice.lang;
     } else {
       // Fallback: try to find Spanish voice again
       const voices = speechSynthesis.getVoices();
