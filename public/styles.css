@@ -126,7 +126,8 @@ body {
 
 .alphabet-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .alphabet-card .letter {
@@ -222,7 +223,8 @@ body {
 
 .number-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .number-card .number {
@@ -289,7 +291,8 @@ body {
 
 .word-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .word-card .mongolian {
@@ -348,7 +351,8 @@ body {
 
 .phrase-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .phrase-card .mongolian {
@@ -407,7 +411,8 @@ body {
 
 .verb-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .verb-card .mongolian {
@@ -483,7 +488,8 @@ body {
 
 .vocab-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .vocab-card .mongolian {
@@ -703,4 +709,40 @@ body {
   .nav-btn {
     width: 200px;
   }
+}
+
+/* Speak indicator styling */
+.speak-indicator {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 10px;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.alphabet-card:hover .speak-indicator,
+.number-card:hover .speak-indicator,
+.word-card:hover .speak-indicator,
+.phrase-card:hover .speak-indicator,
+.verb-card:hover .speak-indicator,
+.vocab-card:hover .speak-indicator {
+  opacity: 1;
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Card cursor pointer */
+.alphabet-card,
+.number-card,
+.word-card,
+.phrase-card,
+.verb-card,
+.vocab-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
 }

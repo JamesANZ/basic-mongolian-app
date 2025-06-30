@@ -1,585 +1,286 @@
 // Global variables
-let mongolianData = null;
-let currentQuiz = null;
-let quizScore = 0;
-let currentQuestionIndex = 0;
-let preferredVoice = null;
-
-// DOM elements
-const navButtons = document.querySelectorAll(".nav-btn");
-const contentSections = document.querySelectorAll(".content-section");
-const alphabetGrid = document.getElementById("alphabetGrid");
-const numbersGrid = document.getElementById("numbersGrid");
-const wordsGrid = document.getElementById("wordsGrid");
-const travelPhrasesGrid = document.getElementById("travelPhrasesGrid");
-const verbsGrid = document.getElementById("verbsGrid");
-const travelVocabGrid = document.getElementById("travelVocabGrid");
-const romanticPhrasesGrid = document.getElementById("romanticPhrasesGrid");
-
-// Quiz elements
-const startQuizBtn = document.getElementById("startQuiz");
-const nextQuestionBtn = document.getElementById("nextQuestion");
-const quizQuestion = document.getElementById("quizQuestion");
-const questionText = document.getElementById("questionText");
-const quizOptions = document.getElementById("quizOptions");
-const quizResult = document.getElementById("quizResult");
-const resultText = document.getElementById("resultText");
-const quizScoreDiv = document.getElementById("quizScore");
-const scoreDisplay = document.getElementById("scoreDisplay");
-const restartQuizBtn = document.getElementById("restartQuiz");
+let currentSection = "alphabet";
+let currentQuestion = 0;
+let score = 0;
+let questions = [];
 
 // Initialize the app
-document.addEventListener("DOMContentLoaded", async () => {
-  await loadMongolianData();
-  setupNavigation();
-  setupSpanishVoice();
-  setupQuiz();
-  renderContent();
-});
-
-// Load Mongolian data from API
-async function loadMongolianData() {
-  try {
-    const response = await fetch("/api/mongolian-data");
-    mongolianData = await response.json();
-  } catch (error) {
-    console.error("Error loading Mongolian data:", error);
-    // Fallback data if API fails
-    mongolianData = {
-      alphabet: { cyrillic: [] },
-      numbers: [],
-      basicWords: [],
-      travelPhrases: [],
-      essentialVerbs: [],
-      travelVocabulary: [],
-      romanticPhrases: [],
-    };
-  }
-}
-
-// Setup Spanish voice for Mongolian pronunciation
-function setupSpanishVoice() {
-  // Load available voices
-  let voices = speechSynthesis.getVoices();
-
-  if (voices.length === 0) {
-    speechSynthesis.addEventListener("voiceschanged", () => {
-      voices = speechSynthesis.getVoices();
-      findSpanishVoice(voices);
-    });
-  } else {
-    findSpanishVoice(voices);
-  }
-}
-
-// Find and set Spanish voice
-function findSpanishVoice(voices) {
-  // Look for Spanish voices (they work well for Mongolian pronunciation)
-  const spanishVoice = voices.find(
-    (v) =>
-      v.lang.toLowerCase().startsWith("es") ||
-      v.name.toLowerCase().includes("spanish") ||
-      v.name.toLowerCase().includes("español"),
-  );
-
-  if (spanishVoice) {
-    preferredVoice = spanishVoice;
-    console.log(
-      `Using Spanish voice: ${spanishVoice.name} (${spanishVoice.lang})`,
-    );
-  } else {
-    console.log("No Spanish voice found, will use default voice");
-  }
-}
-
-// Setup navigation
-function setupNavigation() {
-  navButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const targetSection = button.getAttribute("data-section");
-      switchSection(targetSection);
-    });
-  });
-}
-
-// Switch between sections
-function switchSection(sectionName) {
-  // Update navigation buttons
-  navButtons.forEach((btn) => btn.classList.remove("active"));
-  document
-    .querySelector(`[data-section="${sectionName}"]`)
-    .classList.add("active");
-
-  // Update content sections
-  contentSections.forEach((section) => section.classList.remove("active"));
-  document.getElementById(sectionName).classList.add("active");
-}
-
-// Render content for all sections
-function renderContent() {
+document.addEventListener("DOMContentLoaded", function () {
   renderAlphabet();
   renderNumbers();
-  renderWords();
+  renderBasicWords();
   renderTravelPhrases();
-  renderVerbs();
+  renderEssentialVerbs();
   renderTravelVocabulary();
   renderRomanticPhrases();
+  setupEventListeners();
+});
+
+// Setup event listeners
+function setupEventListeners() {
+  // Navigation
+  document.querySelectorAll(".nav-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const section = btn.getAttribute("data-section");
+      showSection(section);
+    });
+  });
+
+  // Quiz controls
+  document.getElementById("startQuiz").addEventListener("click", startQuiz);
+  document
+    .getElementById("nextQuestion")
+    .addEventListener("click", nextQuestion);
+  document.getElementById("restartQuiz").addEventListener("click", restartQuiz);
+
+  // Keyboard navigation
+  document.addEventListener("keydown", handleKeyboardNavigation);
+}
+
+// Show section
+function showSection(section) {
+  // Hide all sections
+  document
+    .querySelectorAll(".content-section")
+    .forEach((s) => s.classList.remove("active"));
+
+  // Show selected section
+  document.getElementById(section).classList.add("active");
+
+  // Update navigation
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach((btn) => btn.classList.remove("active"));
+  document.querySelector(`[data-section="${section}"]`).classList.add("active");
+
+  currentSection = section;
+}
+
+// Handle keyboard navigation
+function handleKeyboardNavigation(e) {
+  if (e.key === "Escape") {
+    showSection("alphabet");
+  }
 }
 
 // Render alphabet section
 function renderAlphabet() {
-  if (!mongolianData?.alphabet?.cyrillic) return;
+  const container = document.getElementById("alphabetGrid");
+  container.innerHTML = "";
 
-  alphabetGrid.innerHTML = "";
   mongolianData.alphabet.cyrillic.forEach((letter) => {
     const card = document.createElement("div");
     card.className = "alphabet-card";
-    
-    // Get emoji based on the example word
-    const emoji = getAlphabetEmoji(letter.example);
-    
     card.innerHTML = `
-            <div class="card-image emoji">${emoji}</div>
-            <span class="letter">${letter.letter}</span>
-            <div class="pronunciation">${letter.pronunciation}</div>
-            ${letter.ipa ? `<div class="ipa">[${letter.ipa}]</div>` : ""}
-            <div class="example">${letter.example}</div>
+            <div class="card-image">🔤</div>
+            <div class="card-content">
+                <h3>${letter.letter}</h3>
+                <p class="pronunciation">${letter.pronunciation}</p>
+                <p class="ipa">[${letter.ipa}]</p>
+                <p class="example">${letter.example}</p>
+                <div class="speak-indicator">🔊 Click to hear</div>
+            </div>
         `;
 
-    // Add click event for pronunciation
-    card.addEventListener("click", () => {
-      speakText(letter.pronunciation, `Letter ${letter.letter}`);
-    });
+    // Make entire card clickable
+    card.addEventListener("click", () => speak(letter.pronunciation));
+    card.style.cursor = "pointer";
 
-    alphabetGrid.appendChild(card);
+    container.appendChild(card);
   });
-}
-
-// Helper function to get emoji for alphabet letters
-function getAlphabetEmoji(example) {
-  const emojiMap = {
-    'Gold': '🥇',
-    'Place': '🏠',
-    'King': '👑',
-    'House': '🏠',
-    'Upper': '⬆️',
-    'General': '🎖️',
-    'Custom': '📜',
-    'Happiness': '😊',
-    'Distance': '📏',
-    'Big': '🐘',
-    'Weapon': '⚔️',
-    'Movie': '🎬',
-    'Monk': '🧘',
-    'Livestock': '🐄',
-    'Book': '📚',
-    'Palace': '🏰',
-    'Park': '🌳',
-    'Radio': '📻',
-    'Beautiful': '🌸',
-    'Sky': '☁️',
-    'Red': '🔴',
-    'Price': '💰',
-    'Factory': '🏭',
-    'Person': '👤',
-    'White': '⚪',
-    'Stone': '🪨',
-    'Yellow': '🟡',
-    'Sorrel': '🌿',
-    'Yes': '✅',
-    'Goat': '🐐',
-    'Jewel': '💎',
-    'Thing': '📦',
-  };
-  
-  // Extract the English word from the example
-  const englishWord = example.split(' - ')[1];
-  return emojiMap[englishWord] || '🔤';
 }
 
 // Render numbers section
 function renderNumbers() {
-  if (!mongolianData?.numbers) return;
+  const container = document.getElementById("numbersGrid");
+  container.innerHTML = "";
 
-  numbersGrid.innerHTML = "";
   mongolianData.numbers.forEach((number) => {
     const card = document.createElement("div");
     card.className = "number-card";
-    
-    // Get emoji for the number
-    const emoji = getNumberEmoji(number.number);
-    
     card.innerHTML = `
-            <div class="card-image emoji">${emoji}</div>
-            <span class="number">${number.number}</span>
-            <div class="mongolian">${number.mongolian}</div>
-            <div class="pronunciation">${number.pronunciation}</div>
-            ${number.ipa ? `<div class="ipa">[${number.ipa}]</div>` : ""}
-            <div class="english">${number.english}</div>
+            <div class="card-image">🔢</div>
+            <div class="card-content">
+                <h3>${number.number}</h3>
+                <p class="mongolian">${number.mongolian}</p>
+                <p class="pronunciation">${number.pronunciation}</p>
+                <p class="ipa">[${number.ipa}]</p>
+                <p class="english">${number.english}</p>
+                <div class="speak-indicator">🔊 Click to hear</div>
+            </div>
         `;
 
-    // Add click event for pronunciation
-    card.addEventListener("click", () => {
-      speakText(number.pronunciation, `Number ${number.number}`);
-    });
+    // Make entire card clickable
+    card.addEventListener("click", () => speak(number.pronunciation));
+    card.style.cursor = "pointer";
 
-    numbersGrid.appendChild(card);
+    container.appendChild(card);
   });
 }
 
-// Helper function to get emoji for numbers
-function getNumberEmoji(number) {
-  const emojiMap = {
-    1: '1️⃣',
-    2: '2️⃣',
-    3: '3️⃣',
-    4: '4️⃣',
-    5: '5️⃣',
-    6: '6️⃣',
-    7: '7️⃣',
-    8: '8️⃣',
-    9: '9️⃣',
-    10: '🔟',
-    11: '1️⃣1️⃣',
-    12: '1️⃣2️⃣',
-    13: '1️⃣3️⃣',
-    14: '1️⃣4️⃣',
-    15: '1️⃣5️⃣',
-    16: '1️⃣6️⃣',
-    17: '1️⃣7️⃣',
-    18: '1️⃣8️⃣',
-    19: '1️⃣9️⃣',
-    20: '2️⃣0️⃣',
-  };
-  return emojiMap[number] || '🔢';
-}
+// Render basic words section
+function renderBasicWords() {
+  const container = document.getElementById("wordsGrid");
+  container.innerHTML = "";
 
-// Render words section
-function renderWords() {
-  if (!mongolianData?.basicWords) return;
-
-  wordsGrid.innerHTML = "";
   mongolianData.basicWords.forEach((word) => {
     const card = document.createElement("div");
     card.className = "word-card";
-    
-    // Get emoji based on the English meaning
-    const emoji = getWordEmoji(word.english);
-    
     card.innerHTML = `
-            <div class="card-image emoji">${emoji}</div>
-            <div class="mongolian">${word.mongolian}</div>
-            <div class="pronunciation">${word.pronunciation}</div>
-            ${word.ipa ? `<div class="ipa">[${word.ipa}]</div>` : ""}
-            <div class="english">${word.english}</div>
+            <div class="card-image">💬</div>
+            <div class="card-content">
+                <h3>${word.mongolian}</h3>
+                <p class="pronunciation">${word.pronunciation}</p>
+                <p class="ipa">[${word.ipa}]</p>
+                <p class="english">${word.english}</p>
+                <div class="speak-indicator">🔊 Click to hear</div>
+            </div>
         `;
 
-    // Add click event for pronunciation
-    card.addEventListener("click", () => {
-      speakText(word.pronunciation, word.english);
-    });
+    // Make entire card clickable
+    card.addEventListener("click", () => speak(word.pronunciation));
+    card.style.cursor = "pointer";
 
-    wordsGrid.appendChild(card);
+    container.appendChild(card);
   });
-}
-
-// Helper function to get emoji for basic words
-function getWordEmoji(english) {
-  const emojiMap = {
-    'Hello/How are you?': '👋',
-    'Goodbye': '👋',
-    'Thank you': '🙏',
-    'Yes': '✅',
-    'No': '❌',
-    'Sorry/Excuse me': '🙏',
-    'I/Me': '👤',
-    'You (formal)': '👤',
-    'You (informal)': '👤',
-    'Water': '💧',
-    'Food': '🍽️',
-    'House/Yurt': '🏠',
-    'Livestock': '🐄',
-    'Sky': '☁️',
-    'Earth': '🌍',
-  };
-  return emojiMap[english] || '📝';
 }
 
 // Render travel phrases section
 function renderTravelPhrases() {
-  if (!mongolianData?.travelPhrases) return;
+  const container = document.getElementById("travelPhrasesGrid");
+  container.innerHTML = "";
 
-  travelPhrasesGrid.innerHTML = "";
   mongolianData.travelPhrases.forEach((phrase) => {
     const card = document.createElement("div");
     card.className = "phrase-card";
-    
-    // Get emoji based on the English meaning
-    const emoji = getTravelPhraseEmoji(phrase.english);
-    
     card.innerHTML = `
-            <div class="card-image emoji">${emoji}</div>
-            <div class="mongolian">${phrase.mongolian}</div>
-            <div class="pronunciation">${phrase.pronunciation}</div>
-            ${phrase.ipa ? `<div class="ipa">[${phrase.ipa}]</div>` : ""}
-            <div class="english">${phrase.english}</div>
-        `;
-
-    // Add click event for pronunciation
-    card.addEventListener("click", () => {
-      speakText(phrase.pronunciation, phrase.english);
-    });
-
-    travelPhrasesGrid.appendChild(card);
-  });
-}
-
-// Helper function to get emoji for travel phrases
-function getTravelPhraseEmoji(english) {
-  const emojiMap = {
-    'Hello/How are you?': '👋',
-    'Goodbye': '👋',
-    'Thank you': '🙏',
-    'Sorry/Excuse me': '🙏',
-    "I don't understand": '🤔',
-    'Do you speak English?': '🗣️',
-    'I am a foreigner': '🌍',
-    'I am traveling': '✈️',
-    'How much is this?': '💰',
-    "It's too expensive": '💸',
-    'Is it cheap?': '💵',
-    'Where is it?': '📍',
-    'Where is this?': '📍',
-    'I am going': '🚶',
-    'I am coming': '🏃',
-    'I am sitting': '🪑',
-    'I am carrying': '📦',
-    'I am looking': '👀',
-    'I am listening': '👂',
-    'I am eating': '🍽️',
-    'I am drinking': '🥤',
-    'I am sleeping': '😴',
-    'I am working': '💼',
-    'I am studying': '📚',
-    'I am playing': '🎮',
-    'I am singing': '🎤',
-    'I am dancing': '💃',
-  };
-  return emojiMap[english] || '🗣️';
-}
-
-// Render verbs section
-function renderVerbs() {
-  if (!mongolianData?.essentialVerbs) return;
-
-  verbsGrid.innerHTML = "";
-  mongolianData.essentialVerbs.forEach((verb) => {
-    const card = document.createElement("div");
-    card.className = "verb-card";
-    
-    // Get emoji based on the English meaning
-    const emoji = getVerbEmoji(verb.english);
-    
-    card.innerHTML = `
-            <div class="card-image emoji">${emoji}</div>
-            <div class="mongolian">${verb.mongolian}</div>
-            <div class="pronunciation">${verb.pronunciation}</div>
-            ${verb.ipa ? `<div class="ipa">[${verb.ipa}]</div>` : ""}
-            <div class="english">${verb.english}</div>
-            <div class="conjugations">
-                <div><strong>Present:</strong> ${verb.present}</div>
-                <div><strong>Past:</strong> ${verb.past}</div>
-                <div><strong>Future:</strong> ${verb.future}</div>
+            <div class="card-image">✈️</div>
+            <div class="card-content">
+                <h3>${phrase.mongolian}</h3>
+                <p class="pronunciation">${phrase.pronunciation}</p>
+                <p class="ipa">[${phrase.ipa}]</p>
+                <p class="english">${phrase.english}</p>
+                <div class="speak-indicator">🔊 Click to hear</div>
             </div>
         `;
 
-    // Add click event for pronunciation
-    card.addEventListener("click", () => {
-      speakText(verb.pronunciation, verb.english);
-    });
+    // Make entire card clickable
+    card.addEventListener("click", () => speak(phrase.pronunciation));
+    card.style.cursor = "pointer";
 
-    verbsGrid.appendChild(card);
+    container.appendChild(card);
   });
 }
 
-// Helper function to get emoji for verbs
-function getVerbEmoji(english) {
-  const emojiMap = {
-    'To go': '🚶',
-    'To come': '🏃',
-    'To sit': '🪑',
-    'To carry': '📦',
-    'To look': '👀',
-    'To listen': '👂',
-    'To eat': '🍽️',
-    'To drink': '🥤',
-    'To sleep': '😴',
-    'To work': '💼',
-    'To study': '📚',
-    'To play': '🎮',
-    'To sing': '🎤',
-    'To dance': '💃',
-    'To write': '✍️',
-    'To read': '📖',
-    'To speak': '🗣️',
-    'To understand': '🧠',
-    'To want': '💭',
-  };
-  return emojiMap[english] || '⚡';
+// Render essential verbs section
+function renderEssentialVerbs() {
+  const container = document.getElementById("verbsGrid");
+  container.innerHTML = "";
+
+  mongolianData.essentialVerbs.forEach((verb) => {
+    const card = document.createElement("div");
+    card.className = "verb-card";
+    card.innerHTML = `
+            <div class="card-image">🏃</div>
+            <div class="card-content">
+                <h3>${verb.mongolian}</h3>
+                <p class="pronunciation">${verb.pronunciation}</p>
+                <p class="ipa">[${verb.ipa}]</p>
+                <p class="english">${verb.english}</p>
+                <div class="conjugations">
+                    <span class="conjugation">Present: ${verb.present}</span>
+                    <span class="conjugation">Past: ${verb.past}</span>
+                    <span class="conjugation">Future: ${verb.future}</span>
+                </div>
+                <div class="speak-indicator">🔊 Click to hear</div>
+            </div>
+        `;
+
+    // Make entire card clickable
+    card.addEventListener("click", () => speak(verb.pronunciation));
+    card.style.cursor = "pointer";
+
+    container.appendChild(card);
+  });
 }
 
 // Render travel vocabulary section
 function renderTravelVocabulary() {
-  if (!mongolianData?.travelVocabulary) return;
+  const container = document.getElementById("travelVocabGrid");
+  container.innerHTML = "";
 
-  travelVocabGrid.innerHTML = "";
   mongolianData.travelVocabulary.forEach((vocab) => {
     const card = document.createElement("div");
     card.className = "vocab-card";
-    
-    // Get emoji based on the English meaning
-    const emoji = getTravelVocabEmoji(vocab.english);
-    
     card.innerHTML = `
-            <div class="card-image emoji">${emoji}</div>
-            <div class="mongolian">${vocab.mongolian}</div>
-            <div class="pronunciation">${vocab.pronunciation}</div>
-            ${vocab.ipa ? `<div class="ipa">[${vocab.ipa}]</div>` : ""}
-            <div class="english">${vocab.english}</div>
+            <div class="card-image">📚</div>
+            <div class="card-content">
+                <h3>${vocab.mongolian}</h3>
+                <p class="pronunciation">${vocab.pronunciation}</p>
+                <p class="ipa">[${vocab.ipa}]</p>
+                <p class="english">${vocab.english}</p>
+                <div class="speak-indicator">🔊 Click to hear</div>
+            </div>
         `;
 
-    // Add click event for pronunciation
-    card.addEventListener("click", () => {
-      speakText(vocab.pronunciation, vocab.english);
-    });
+    // Make entire card clickable
+    card.addEventListener("click", () => speak(vocab.pronunciation));
+    card.style.cursor = "pointer";
 
-    travelVocabGrid.appendChild(card);
+    container.appendChild(card);
   });
-}
-
-// Helper function to get emoji for travel vocabulary
-function getTravelVocabEmoji(english) {
-  const emojiMap = {
-    'Hotel': '🏨',
-    'Restaurant': '🍽️',
-    'Food': '🍽️',
-    'Water': '💧',
-    'Tea': '🍵',
-    'Coffee': '☕',
-    'Money': '💰',
-    'Tugrik (currency)': '💱',
-    'Price': '💰',
-    'Cheap': '💵',
-    'Expensive': '💸',
-    'Market': '🛒',
-    'Shop': '🏪',
-    'Hospital': '🏥',
-    'Medicine': '💊',
-    'Bus': '🚌',
-    'Taxi': '🚕',
-    'Airplane': '✈️',
-    'Train': '🚂',
-    'Road': '🛣️',
-    'Where': '📍',
-    'When': '🕐',
-    'Why': '❓',
-    'What': '❓',
-    'Who': '👤',
-    'How': '❓',
-    'How many': '🔢',
-    'How much': '💰',
-    'This': '👉',
-    'That': '👉',
-    'Here': '📍',
-    'There': '📍',
-    'Now': '⏰',
-    'Yesterday': '📅',
-    'Tomorrow': '📅',
-    'Today': '📅',
-  };
-  return emojiMap[english] || '📝';
 }
 
 // Render romantic phrases section
 function renderRomanticPhrases() {
-  if (!mongolianData?.romanticPhrases) return;
+  const container = document.getElementById("romanticPhrasesGrid");
+  container.innerHTML = "";
 
-  romanticPhrasesGrid.innerHTML = "";
   mongolianData.romanticPhrases.forEach((phrase) => {
     const card = document.createElement("div");
     card.className = "phrase-card";
-    
-    // Get emoji based on the English meaning
-    const emoji = getRomanticPhraseEmoji(phrase.english);
-    
     card.innerHTML = `
-            <div class="card-image emoji">${emoji}</div>
-            <div class="mongolian">${phrase.mongolian}</div>
-            <div class="pronunciation">${phrase.pronunciation}</div>
-            ${phrase.ipa ? `<div class="ipa">[${phrase.ipa}]</div>` : ""}
-            <div class="english">${phrase.english}</div>
+            <div class="card-image">💕</div>
+            <div class="card-content">
+                <h3>${phrase.mongolian}</h3>
+                <p class="pronunciation">${phrase.pronunciation}</p>
+                <p class="ipa">[${phrase.ipa}]</p>
+                <p class="english">${phrase.english}</p>
+                <div class="speak-indicator">🔊 Click to hear</div>
+            </div>
         `;
 
-    // Add click event for pronunciation
-    card.addEventListener("click", () => {
-      speakText(phrase.pronunciation, phrase.english);
-    });
+    // Make entire card clickable
+    card.addEventListener("click", () => speak(phrase.pronunciation));
+    card.style.cursor = "pointer";
 
-    romanticPhrasesGrid.appendChild(card);
+    container.appendChild(card);
   });
 }
 
-// Helper function to get emoji for romantic phrases
-function getRomanticPhraseEmoji(english) {
-  const emojiMap = {
-    'I love you': '💕',
-    'You are my love': '💖',
-    'You look beautiful': '🌸',
-    'I want you': '💭',
-    'You are my everything': '💝',
-    'I can smell you': '👃',
-    'You are my desire': '🔥',
-    'I want to touch you': '🤗',
-    'You are my person': '👫',
-    'I am kissing you': '💋',
-    'You are my life': '💗',
-    'I respect you': '🙏',
-    'You are my heart': '💓',
-    'I cherish you': '💞',
-    'You are my happiness': '😊',
-  };
-  return emojiMap[english] || '💕';
-}
-
-// Text-to-speech function optimized for Spanish voice
-function speakText(text, description = "") {
+// Speech synthesis function
+function speak(text) {
   if ("speechSynthesis" in window) {
     // Cancel any ongoing speech
     speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
 
-    // Use Spanish voice if available
-    if (preferredVoice) {
-      utterance.voice = preferredVoice;
-      utterance.lang = preferredVoice.lang;
-    } else {
-      // Fallback: try to find Spanish voice again
-      const voices = speechSynthesis.getVoices();
-      const spanishVoice = voices.find(
-        (v) =>
-          v.lang.toLowerCase().startsWith("es") ||
-          v.name.toLowerCase().includes("spanish") ||
-          v.name.toLowerCase().includes("español"),
-      );
+    // Try to use Spanish voice for better Mongolian pronunciation
+    const voices = speechSynthesis.getVoices();
+    let spanishVoice = voices.find(
+      (voice) =>
+        voice.lang.includes("es") ||
+        voice.name.toLowerCase().includes("spanish") ||
+        voice.name.toLowerCase().includes("español"),
+    );
 
-      if (spanishVoice) {
-        utterance.voice = spanishVoice;
-        utterance.lang = spanishVoice.lang;
-      } else {
-        // Last resort: use default voice
-        utterance.lang = "en-US";
-      }
+    if (spanishVoice) {
+      utterance.voice = spanishVoice;
+      utterance.lang = spanishVoice.lang;
+    } else {
+      // Fallback to default voice
+      utterance.lang = "en-US";
     }
 
     // Optimize settings for learning
@@ -590,7 +291,7 @@ function speakText(text, description = "") {
     // Add event listeners for better user experience
     utterance.onstart = () => {
       console.log(
-        `Speaking: ${text} (${description}) with voice: ${utterance.voice?.name || "default"}`,
+        `Speaking: ${text} with voice: ${utterance.voice?.name || "default"}`,
       );
     };
 
@@ -600,17 +301,18 @@ function speakText(text, description = "") {
 
     utterance.onerror = (event) => {
       console.error("Speech error:", event.error);
-      showPronunciationFallback(text, description);
     };
 
     speechSynthesis.speak(utterance);
   } else {
-    showPronunciationFallback(text, description);
+    console.log("Speech synthesis not supported");
+    // Fallback: show pronunciation in an alert or overlay
+    showPronunciationFallback(text);
   }
 }
 
-// Fallback function to show pronunciation guide
-function showPronunciationFallback(text, description = "") {
+// Fallback function to show pronunciation
+function showPronunciationFallback(text) {
   // Create a temporary overlay to show pronunciation
   const overlay = document.createElement("div");
   overlay.style.cssText = `
@@ -633,7 +335,6 @@ function showPronunciationFallback(text, description = "") {
   overlay.innerHTML = `
         <div style="margin-bottom: 10px;">🔊 Pronunciation:</div>
         <div style="font-size: 1.5rem; color: #4facfe; margin-bottom: 8px;">${text}</div>
-        ${description ? `<div style="font-size: 0.9rem; opacity: 0.8;">${description}</div>` : ""}
     `;
 
   document.body.appendChild(overlay);
@@ -646,371 +347,179 @@ function showPronunciationFallback(text, description = "") {
   }, 3000);
 }
 
-// Quiz functionality
-function setupQuiz() {
-  startQuizBtn.addEventListener("click", startQuiz);
-  nextQuestionBtn.addEventListener("click", nextQuestion);
-  restartQuizBtn.addEventListener("click", startQuiz);
-}
-
-// Start the quiz
+// Quiz functions
 function startQuiz() {
-  if (!mongolianData) return;
+  // Combine all data for quiz questions
+  const allData = [
+    ...mongolianData.alphabet.cyrillic.map((item) => ({
+      question: `What is the pronunciation of "${item.letter}"?`,
+      correct: item.pronunciation,
+      options: [
+        item.pronunciation,
+        item.ipa,
+        item.example.split(" ")[0],
+        "None of the above",
+      ],
+    })),
+    ...mongolianData.numbers.map((item) => ({
+      question: `How do you say "${item.english}" in Mongolian?`,
+      correct: item.pronunciation,
+      options: [
+        item.pronunciation,
+        item.mongolian,
+        item.ipa,
+        "None of the above",
+      ],
+    })),
+    ...mongolianData.basicWords.map((item) => ({
+      question: `What does "${item.mongolian}" mean?`,
+      correct: item.english,
+      options: [
+        item.english,
+        item.pronunciation,
+        item.ipa,
+        "None of the above",
+      ],
+    })),
+    ...mongolianData.travelPhrases.map((item) => ({
+      question: `Translate: "${item.english}"`,
+      correct: item.pronunciation,
+      options: [
+        item.pronunciation,
+        item.mongolian,
+        item.ipa,
+        "None of the above",
+      ],
+    })),
+    ...mongolianData.essentialVerbs.map((item) => ({
+      question: `What is the present tense of "${item.mongolian}"?`,
+      correct: item.present,
+      options: [item.present, item.past, item.future, "None of the above"],
+    })),
+    ...mongolianData.travelVocabulary.map((item) => ({
+      question: `What is "${item.english}" in Mongolian?`,
+      correct: item.pronunciation,
+      options: [
+        item.pronunciation,
+        item.mongolian,
+        item.ipa,
+        "None of the above",
+      ],
+    })),
+    ...mongolianData.romanticPhrases.map((item) => ({
+      question: `What does "${item.mongolian}" mean?`,
+      correct: item.english,
+      options: [
+        item.english,
+        item.pronunciation,
+        item.ipa,
+        "None of the above",
+      ],
+    })),
+  ];
 
-  // Reset quiz state
-  quizScore = 0;
-  currentQuestionIndex = 0;
+  // Shuffle and select 10 questions
+  questions = allData.sort(() => Math.random() - 0.5).slice(0, 10);
+  currentQuestion = 0;
+  score = 0;
 
-  // Create quiz questions
-  currentQuiz = generateQuizQuestions();
-
-  // Show first question
-  showQuestion();
-
-  // Update UI
-  startQuizBtn.style.display = "none";
-  quizQuestion.style.display = "block";
-  quizScoreDiv.style.display = "none";
+  showQuizQuestion();
+  document.getElementById("startQuiz").style.display = "none";
+  document.getElementById("quizQuestion").style.display = "block";
 }
 
-// Generate quiz questions
-function generateQuizQuestions() {
-  const questions = [];
-
-  // Add alphabet questions
-  if (mongolianData.alphabet.cyrillic.length > 0) {
-    const alphabetQuestions = generateAlphabetQuestions();
-    questions.push(...alphabetQuestions);
-  }
-
-  // Add number questions
-  if (mongolianData.numbers.length > 0) {
-    const numberQuestions = generateNumberQuestions();
-    questions.push(...numberQuestions);
-  }
-
-  // Add word questions
-  if (mongolianData.basicWords.length > 0) {
-    const wordQuestions = generateWordQuestions();
-    questions.push(...wordQuestions);
-  }
-
-  // Add travel phrase questions
-  if (mongolianData.travelPhrases.length > 0) {
-    const phraseQuestions = generatePhraseQuestions();
-    questions.push(...phraseQuestions);
-  }
-
-  // Add verb questions
-  if (mongolianData.essentialVerbs.length > 0) {
-    const verbQuestions = generateVerbQuestions();
-    questions.push(...verbQuestions);
-  }
-
-  // Add vocabulary questions
-  if (mongolianData.travelVocabulary.length > 0) {
-    const vocabQuestions = generateVocabQuestions();
-    questions.push(...vocabQuestions);
-  }
-
-  // Add romantic phrase questions
-  if (mongolianData.romanticPhrases.length > 0) {
-    const romanticQuestions = generateRomanticQuestions();
-    questions.push(...romanticQuestions);
-  }
-
-  // Shuffle questions
-  return shuffleArray(questions).slice(0, 15); // Increased to 15 questions
-}
-
-// Generate alphabet questions
-function generateAlphabetQuestions() {
-  const questions = [];
-  const letters = mongolianData.alphabet.cyrillic;
-
-  letters.forEach((letter) => {
-    questions.push({
-      type: "alphabet",
-      question: `What is the pronunciation of the letter "${letter.letter}"?`,
-      correctAnswer: letter.pronunciation,
-      options: generateOptions(
-        letters.map((l) => l.pronunciation),
-        letter.pronunciation,
-      ),
-    });
-  });
-
-  return questions;
-}
-
-// Generate number questions
-function generateNumberQuestions() {
-  const questions = [];
-  const numbers = mongolianData.numbers;
-
-  numbers.forEach((number) => {
-    questions.push({
-      type: "number",
-      question: `How do you say "${number.english}" in Mongolian?`,
-      correctAnswer: number.mongolian,
-      options: generateOptions(
-        numbers.map((n) => n.mongolian),
-        number.mongolian,
-      ),
-    });
-  });
-
-  return questions;
-}
-
-// Generate word questions
-function generateWordQuestions() {
-  const questions = [];
-  const words = mongolianData.basicWords;
-
-  words.forEach((word) => {
-    questions.push({
-      type: "word",
-      question: `What does "${word.mongolian}" mean?`,
-      correctAnswer: word.english,
-      options: generateOptions(
-        words.map((w) => w.english),
-        word.english,
-      ),
-    });
-  });
-
-  return questions;
-}
-
-// Generate travel phrase questions
-function generatePhraseQuestions() {
-  const questions = [];
-  const phrases = mongolianData.travelPhrases;
-
-  phrases.forEach((phrase) => {
-    questions.push({
-      type: "phrase",
-      question: `What does "${phrase.mongolian}" mean?`,
-      correctAnswer: phrase.english,
-      options: generateOptions(
-        phrases.map((p) => p.english),
-        phrase.english,
-      ),
-    });
-  });
-
-  return questions;
-}
-
-// Generate verb questions
-function generateVerbQuestions() {
-  const questions = [];
-  const verbs = mongolianData.essentialVerbs;
-
-  verbs.forEach((verb) => {
-    questions.push({
-      type: "verb",
-      question: `What does the verb "${verb.mongolian}" mean?`,
-      correctAnswer: verb.english,
-      options: generateOptions(
-        verbs.map((v) => v.english),
-        verb.english,
-      ),
-    });
-  });
-
-  return questions;
-}
-
-// Generate vocabulary questions
-function generateVocabQuestions() {
-  const questions = [];
-  const vocab = mongolianData.travelVocabulary;
-
-  vocab.forEach((word) => {
-    questions.push({
-      type: "vocab",
-      question: `What does "${word.mongolian}" mean?`,
-      correctAnswer: word.english,
-      options: generateOptions(
-        vocab.map((v) => v.english),
-        word.english,
-      ),
-    });
-  });
-
-  return questions;
-}
-
-// Generate romantic phrase questions
-function generateRomanticQuestions() {
-  const questions = [];
-  const phrases = mongolianData.romanticPhrases;
-
-  phrases.forEach((phrase) => {
-    questions.push({
-      type: "romantic",
-      question: `What does "${phrase.mongolian}" mean?`,
-      correctAnswer: phrase.english,
-      options: generateOptions(
-        phrases.map((p) => p.english),
-        phrase.english,
-      ),
-    });
-  });
-
-  return questions;
-}
-
-// Generate options for multiple choice
-function generateOptions(allOptions, correctAnswer) {
-  const options = [correctAnswer];
-  const filteredOptions = allOptions.filter((opt) => opt !== correctAnswer);
-
-  // Add 3 random wrong options
-  while (options.length < 4 && filteredOptions.length > 0) {
-    const randomIndex = Math.floor(Math.random() * filteredOptions.length);
-    const option = filteredOptions.splice(randomIndex, 1)[0];
-    if (!options.includes(option)) {
-      options.push(option);
-    }
-  }
-
-  return shuffleArray(options);
-}
-
-// Show current question
-function showQuestion() {
-  if (currentQuestionIndex >= currentQuiz.length) {
+function showQuizQuestion() {
+  if (currentQuestion >= questions.length) {
     showQuizResults();
     return;
   }
 
-  const question = currentQuiz[currentQuestionIndex];
-  questionText.textContent = question.question;
+  const question = questions[currentQuestion];
+  const options = question.options.sort(() => Math.random() - 0.5);
 
-  // Clear previous options
-  quizOptions.innerHTML = "";
-  quizResult.style.display = "none";
+  document.getElementById("questionText").textContent = question.question;
 
-  // Add options
-  question.options.forEach((option, index) => {
-    const optionElement = document.createElement("div");
-    optionElement.className = "quiz-option";
-    optionElement.textContent = option;
-    optionElement.addEventListener("click", () =>
-      selectAnswer(option, question.correctAnswer),
-    );
-    quizOptions.appendChild(optionElement);
+  const optionsContainer = document.getElementById("quizOptions");
+  optionsContainer.innerHTML = "";
+
+  options.forEach((option) => {
+    const button = document.createElement("button");
+    button.className = "quiz-option";
+    button.textContent = option;
+    button.onclick = () => selectAnswer(option);
+    optionsContainer.appendChild(button);
   });
 }
 
-// Handle answer selection
-function selectAnswer(selectedAnswer, correctAnswer) {
-  const options = document.querySelectorAll(".quiz-option");
-  const isCorrect = selectedAnswer === correctAnswer;
+function selectAnswer(selected) {
+  const question = questions[currentQuestion];
+  const isCorrect = selected === question.correct;
 
   if (isCorrect) {
-    quizScore++;
+    score++;
   }
 
-  // Show correct/incorrect feedback
-  options.forEach((option) => {
-    option.style.pointerEvents = "none";
-    if (option.textContent === correctAnswer) {
-      option.classList.add("correct");
-    } else if (option.textContent === selectedAnswer && !isCorrect) {
-      option.classList.add("incorrect");
+  // Show feedback
+  const options = document.querySelectorAll(".quiz-option");
+  options.forEach((btn) => {
+    btn.disabled = true;
+    if (btn.textContent === question.correct) {
+      btn.classList.add("correct");
+    } else if (btn.textContent === selected && !isCorrect) {
+      btn.classList.add("incorrect");
     }
   });
 
   // Show result message
+  const resultText = document.getElementById("resultText");
   resultText.textContent = isCorrect
     ? "✅ Correct! Well done!"
-    : `❌ Incorrect. The correct answer is: ${correctAnswer}`;
+    : `❌ Incorrect. The correct answer is: ${question.correct}`;
   resultText.className = `quiz-result ${isCorrect ? "correct" : "incorrect"}`;
-  quizResult.style.display = "block";
+  document.getElementById("quizResult").style.display = "block";
 
   // Show next button
-  nextQuestionBtn.style.display = "inline-block";
+  document.getElementById("nextQuestion").style.display = "inline-block";
 }
 
-// Move to next question
 function nextQuestion() {
-  currentQuestionIndex++;
-  nextQuestionBtn.style.display = "none";
-  showQuestion();
+  currentQuestion++;
+  document.getElementById("nextQuestion").style.display = "none";
+  document.getElementById("quizResult").style.display = "none";
+  showQuizQuestion();
 }
 
-// Show quiz results
 function showQuizResults() {
-  quizQuestion.style.display = "none";
-  quizScoreDiv.style.display = "block";
+  const percentage = Math.round((score / questions.length) * 100);
+  document.getElementById("scoreDisplay").textContent =
+    `${score}/${questions.length} (${percentage}%)`;
 
-  const percentage = Math.round((quizScore / currentQuiz.length) * 100);
-  scoreDisplay.textContent = `${quizScore}/${currentQuiz.length} (${percentage}%)`;
+  document.getElementById("quizQuestion").style.display = "none";
+  document.getElementById("quizScore").style.display = "block";
 
-  // Add encouraging message based on score
+  // Add encouraging message
   const scoreMessage = document.createElement("p");
-  if (percentage >= 90) {
-    scoreMessage.textContent =
-      "🎉 Excellent! You're a Mongolian language master!";
-  } else if (percentage >= 70) {
-    scoreMessage.textContent = "👍 Great job! Keep practicing!";
-  } else if (percentage >= 50) {
-    scoreMessage.textContent =
-      "📚 Good effort! Review the lessons and try again!";
-  } else {
-    scoreMessage.textContent = "💪 Don't give up! Practice makes perfect!";
-  }
+  scoreMessage.textContent = getResultMessage(percentage);
   scoreMessage.style.marginTop = "15px";
   scoreMessage.style.fontWeight = "600";
-  quizScoreDiv.appendChild(scoreMessage);
+  document.getElementById("quizScore").appendChild(scoreMessage);
 }
 
-// Utility function to shuffle array
-function shuffleArray(array) {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
+function getResultMessage(percentage) {
+  if (percentage >= 90)
+    return "🎉 Excellent! You're a Mongolian language master!";
+  if (percentage >= 80) return "🌟 Great job! You're doing very well!";
+  if (percentage >= 70) return "👍 Good work! Keep practicing!";
+  if (percentage >= 60) return "📚 Not bad! Review the material and try again!";
+  return "💪 Keep studying! Practice makes perfect!";
 }
 
-// Add some interactive features
-document.addEventListener("DOMContentLoaded", () => {
-  // Add hover effects for cards
-  const cards = document.querySelectorAll(
-    ".alphabet-card, .number-card, .word-card, .phrase-card, .verb-card, .vocab-card",
+function restartQuiz() {
+  document.getElementById("quizScore").style.display = "none";
+  document.getElementById("startQuiz").style.display = "inline-block";
+  // Remove any added score messages
+  const scoreMessages = document.querySelectorAll(
+    "#quizScore p:not(:first-child)",
   );
-  cards.forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      card.style.transform = "translateY(-5px) scale(1.02)";
-    });
-
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "translateY(0) scale(1)";
-    });
-  });
-
-  // Add keyboard navigation
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-      const activeSection = document.querySelector(".content-section.active");
-      const currentIndex = Array.from(contentSections).indexOf(activeSection);
-      let nextIndex;
-
-      if (e.key === "ArrowRight") {
-        nextIndex = (currentIndex + 1) % contentSections.length;
-      } else {
-        nextIndex =
-          (currentIndex - 1 + contentSections.length) % contentSections.length;
-      }
-
-      const nextSection = contentSections[nextIndex].id;
-      switchSection(nextSection);
-    }
-  });
-});
+  scoreMessages.forEach((msg) => msg.remove());
+}
