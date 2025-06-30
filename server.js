@@ -943,6 +943,98 @@ app.get("/api/mongolian-data", (req, res) => {
         english: "Today",
       },
     ],
+    romanticPhrases: [
+      {
+        mongolian: "Би чамд хайртай",
+        pronunciation: "Bi chamd khairtai",
+        ipa: "bi tʃamd xairtai",
+        english: "I love you",
+      },
+      {
+        mongolian: "Чи миний хайр",
+        pronunciation: "Chi minii khair",
+        ipa: "tʃi miniː xair",
+        english: "You are my love",
+      },
+      {
+        mongolian: "Чи сайхан харагдаж байна",
+        pronunciation: "Chi saikhan kharagdaj baina",
+        ipa: "tʃi saixan xaraɡdadʒ baina",
+        english: "You look beautiful",
+      },
+      {
+        mongolian: "Би чамайг хүсэж байна",
+        pronunciation: "Bi chamaig khüsej baina",
+        ipa: "bi tʃamaig xusedʒ baina",
+        english: "I want you",
+      },
+      {
+        mongolian: "Чи миний бүх зүйл",
+        pronunciation: "Chi minii bükh züil",
+        ipa: "tʃi miniː bux zui",
+        english: "You are my everything",
+      },
+      {
+        mongolian: "Би чамайг үнэрлэж байна",
+        pronunciation: "Bi chamaig ünerlej baina",
+        ipa: "bi tʃamaig unerledʒ baina",
+        english: "I can smell you",
+      },
+      {
+        mongolian: "Чи миний хүсэл",
+        pronunciation: "Chi minii khüsel",
+        ipa: "tʃi miniː xusel",
+        english: "You are my desire",
+      },
+      {
+        mongolian: "Би чамайг хүртэл хүсэж байна",
+        pronunciation: "Bi chamaig khürtel khüsej baina",
+        ipa: "bi tʃamaig xurtel xusedʒ baina",
+        english: "I want to touch you",
+      },
+      {
+        mongolian: "Чи миний хүн",
+        pronunciation: "Chi minii khün",
+        ipa: "tʃi miniː xun",
+        english: "You are my person",
+      },
+      {
+        mongolian: "Би чамайг үнсэж байна",
+        pronunciation: "Bi chamaig ünsej baina",
+        ipa: "bi tʃamaig unsedʒ baina",
+        english: "I am kissing you",
+      },
+      {
+        mongolian: "Чи миний амьдрал",
+        pronunciation: "Chi minii amidral",
+        ipa: "tʃi miniː amidral",
+        english: "You are my life",
+      },
+      {
+        mongolian: "Би чамайг хүндэтгэж байна",
+        pronunciation: "Bi chamaig khündetgej baina",
+        ipa: "bi tʃamaig xundetɡedʒ baina",
+        english: "I respect you",
+      },
+      {
+        mongolian: "Чи миний сэтгэл",
+        pronunciation: "Chi minii setgel",
+        ipa: "tʃi miniː setɡel",
+        english: "You are my heart",
+      },
+      {
+        mongolian: "Би чамайг хүндэлж байна",
+        pronunciation: "Bi chamaig khündelj baina",
+        ipa: "bi tʃamaig xundeldʒ baina",
+        english: "I cherish you",
+      },
+      {
+        mongolian: "Чи миний аз жаргал",
+        pronunciation: "Chi minii az jargal",
+        ipa: "tʃi miniː az dʒarɡal",
+        english: "You are my happiness",
+      },
+    ],
   };
 
   res.json(mongolianData);

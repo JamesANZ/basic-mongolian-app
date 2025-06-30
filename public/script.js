@@ -14,6 +14,7 @@ const wordsGrid = document.getElementById("wordsGrid");
 const travelPhrasesGrid = document.getElementById("travelPhrasesGrid");
 const verbsGrid = document.getElementById("verbsGrid");
 const travelVocabGrid = document.getElementById("travelVocabGrid");
+const romanticPhrasesGrid = document.getElementById("romanticPhrasesGrid");
 
 // Quiz elements
 const startQuizBtn = document.getElementById("startQuiz");
@@ -51,6 +52,7 @@ async function loadMongolianData() {
       travelPhrases: [],
       essentialVerbs: [],
       travelVocabulary: [],
+      romanticPhrases: [],
     };
   }
 }
@@ -121,6 +123,7 @@ function renderContent() {
   renderTravelPhrases();
   renderVerbs();
   renderTravelVocabulary();
+  renderRomanticPhrases();
 }
 
 // Render alphabet section
@@ -270,6 +273,30 @@ function renderTravelVocabulary() {
     });
 
     travelVocabGrid.appendChild(card);
+  });
+}
+
+// Render romantic phrases section
+function renderRomanticPhrases() {
+  if (!mongolianData?.romanticPhrases) return;
+
+  romanticPhrasesGrid.innerHTML = "";
+  mongolianData.romanticPhrases.forEach((phrase) => {
+    const card = document.createElement("div");
+    card.className = "phrase-card";
+    card.innerHTML = `
+            <div class="mongolian">${phrase.mongolian}</div>
+            <div class="pronunciation">${phrase.pronunciation}</div>
+            ${phrase.ipa ? `<div class="ipa">[${phrase.ipa}]</div>` : ""}
+            <div class="english">${phrase.english}</div>
+        `;
+
+    // Add click event for pronunciation
+    card.addEventListener("click", () => {
+      speakText(phrase.pronunciation, phrase.english);
+    });
+
+    romanticPhrasesGrid.appendChild(card);
   });
 }
 
@@ -435,6 +462,12 @@ function generateQuizQuestions() {
     questions.push(...vocabQuestions);
   }
 
+  // Add romantic phrase questions
+  if (mongolianData.romanticPhrases.length > 0) {
+    const romanticQuestions = generateRomanticQuestions();
+    questions.push(...romanticQuestions);
+  }
+
   // Shuffle questions
   return shuffleArray(questions).slice(0, 15); // Increased to 15 questions
 }
@@ -552,6 +585,26 @@ function generateVocabQuestions() {
       options: generateOptions(
         vocab.map((v) => v.english),
         word.english,
+      ),
+    });
+  });
+
+  return questions;
+}
+
+// Generate romantic phrase questions
+function generateRomanticQuestions() {
+  const questions = [];
+  const phrases = mongolianData.romanticPhrases;
+
+  phrases.forEach((phrase) => {
+    questions.push({
+      type: "romantic",
+      question: `What does "${phrase.mongolian}" mean?`,
+      correctAnswer: phrase.english,
+      options: generateOptions(
+        phrases.map((p) => p.english),
+        phrase.english,
       ),
     });
   });
