@@ -33,6 +33,9 @@
         <button class="nav-btn" data-section="romantic-phrases">
           Romantic Phrases
         </button>
+        <button class="nav-btn" data-section="cultural-phrases">
+          Cultural Phrases
+        </button>
         <button class="nav-btn" data-section="quiz">Quiz</button>
       </nav>
 
@@ -47,7 +50,7 @@
 
         <!-- Numbers Section -->
         <section id="numbers" class="content-section">
-          <h2>Counting in Mongolian (1-20)</h2>
+          <h2>Counting in Mongolian (1-100)</h2>
           <div class="numbers-grid" id="numbersGrid">
             <!-- Number cards will be populated by JavaScript -->
           </div>
@@ -55,7 +58,10 @@
 
         <!-- Basic Words Section -->
         <section id="words" class="content-section">
-          <h2>Basic Mongolian Words</h2>
+          <h2>Essential Mongolian Words & Expressions</h2>
+          <p class="section-description">
+            Core vocabulary and everyday expressions for basic communication
+          </p>
           <div class="words-grid" id="wordsGrid">
             <!-- Word cards will be populated by JavaScript -->
           </div>
@@ -63,9 +69,9 @@
 
         <!-- Travel Phrases Section -->
         <section id="travel-phrases" class="content-section">
-          <h2>Essential Travel Phrases</h2>
+          <h2>Comprehensive Travel Phrases</h2>
           <p class="section-description">
-            Essential phrases for travelers in Mongolia
+            Essential phrases and expressions for travelers in Mongolia
           </p>
           <div class="phrases-grid" id="travelPhrasesGrid">
             <!-- Travel phrase cards will be populated by JavaScript -->
@@ -74,9 +80,9 @@
 
         <!-- Essential Verbs Section -->
         <section id="verbs" class="content-section">
-          <h2>Essential Mongolian Verbs</h2>
+          <h2>Comprehensive Mongolian Verbs</h2>
           <p class="section-description">
-            Learn common verbs with their conjugations
+            Learn essential verbs with their conjugations and usage
           </p>
           <div class="verbs-grid" id="verbsGrid">
             <!-- Verb cards will be populated by JavaScript -->
@@ -85,9 +91,9 @@
 
         <!-- Travel Vocabulary Section -->
         <section id="travel-vocab" class="content-section">
-          <h2>Travel Vocabulary</h2>
+          <h2>Comprehensive Travel Vocabulary</h2>
           <p class="section-description">
-            Essential words for traveling in Mongolia
+            Essential vocabulary for traveling and living in Mongolia
           </p>
           <div class="vocab-grid" id="travelVocabGrid">
             <!-- Vocabulary cards will be populated by JavaScript -->
@@ -96,12 +102,23 @@
 
         <!-- Romantic Phrases Section -->
         <section id="romantic-phrases" class="content-section">
-          <h2>Romantic Phrases</h2>
+          <h2>Romantic & Affectionate Phrases</h2>
           <p class="section-description">
-            Essential phrases for romantic moments in Mongolia
+            Expressions of love, affection, and romantic feelings in Mongolian
           </p>
           <div class="phrases-grid" id="romanticPhrasesGrid">
             <!-- Romantic phrase cards will be populated by JavaScript -->
+          </div>
+        </section>
+
+        <!-- Cultural Phrases Section -->
+        <section id="cultural-phrases" class="content-section">
+          <h2>Cultural Phrases</h2>
+          <p class="section-description">
+            Traditional Mongolian cultural expressions and greetings
+          </p>
+          <div class="phrases-grid" id="culturalPhrasesGrid">
+            <!-- Cultural phrase cards will be populated by JavaScript -->
           </div>
         </section>
 
@@ -503,6 +520,76 @@
             ipa: "xɔrin",
             english: "twenty",
           },
+          {
+            number: 21,
+            mongolian: "хорин нэг",
+            pronunciation: "khorin neg",
+            ipa: "xɔrin neg",
+            english: "twenty-one",
+          },
+          {
+            number: 25,
+            mongolian: "хорин тав",
+            pronunciation: "khorin tav",
+            ipa: "xɔrin tav",
+            english: "twenty-five",
+          },
+          {
+            number: 30,
+            mongolian: "гуч",
+            pronunciation: "guch",
+            ipa: "ɡutʃ",
+            english: "thirty",
+          },
+          {
+            number: 40,
+            mongolian: "дөч",
+            pronunciation: "döch",
+            ipa: "dɵtʃ",
+            english: "forty",
+          },
+          {
+            number: 50,
+            mongolian: "тавь",
+            pronunciation: "tavi",
+            ipa: "tavi",
+            english: "fifty",
+          },
+          {
+            number: 60,
+            mongolian: "жар",
+            pronunciation: "jar",
+            ipa: "dʒar",
+            english: "sixty",
+          },
+          {
+            number: 70,
+            mongolian: "дал",
+            pronunciation: "dal",
+            ipa: "dal",
+            english: "seventy",
+          },
+          {
+            number: 80,
+            mongolian: "ная",
+            pronunciation: "naya",
+            ipa: "naja",
+            english: "eighty",
+          },
+          {
+            number: 90,
+            mongolian: "ер",
+            pronunciation: "yer",
+            ipa: "jer",
+            english: "ninety",
+          },
+          {
+            number: 100,
+            mongolian: "зуу",
+            pronunciation: "zuu",
+            ipa: "zuː",
+            english: "hundred",
+          },
         ],
         basicWords: [
           {
@@ -584,6 +671,588 @@
             pronunciation: "Gazryn",
             ipa: "ɡazrin",
             english: "Earth",
+          },
+          {
+            mongolian: "Сайхан",
+            pronunciation: "Saikhan",
+            ipa: "saixan",
+            english: "Beautiful",
+          },
+          {
+            mongolian: "Муу",
+            pronunciation: "Muu",
+            ipa: "muː",
+            english: "Bad",
+          },
+          {
+            mongolian: "Том",
+            pronunciation: "Tom",
+            ipa: "tɔm",
+            english: "Big",
+          },
+          {
+            mongolian: "Жижиг",
+            pronunciation: "Jijig",
+            ipa: "dʒidʒiɡ",
+            english: "Small",
+          },
+          {
+            mongolian: "Хурдан",
+            pronunciation: "Khurdan",
+            ipa: "xurdan",
+            english: "Fast",
+          },
+          {
+            mongolian: "Удаан",
+            pronunciation: "Udaan",
+            ipa: "udaːn",
+            english: "Slow",
+          },
+          {
+            mongolian: "Халуун",
+            pronunciation: "Khaluun",
+            ipa: "xaluːn",
+            english: "Hot",
+          },
+          {
+            mongolian: "Хүйтэн",
+            pronunciation: "Khüiten",
+            ipa: "xuiten",
+            english: "Cold",
+          },
+          {
+            mongolian: "Шинэ",
+            pronunciation: "Shine",
+            ipa: "ʃine",
+            english: "New",
+          },
+          {
+            mongolian: "Хуучин",
+            pronunciation: "Khuuchin",
+            ipa: "xuːtʃin",
+            english: "Old",
+          },
+          {
+            mongolian: "Цагаан",
+            pronunciation: "Tsagaan",
+            ipa: "tsaɡaːn",
+            english: "White",
+          },
+          {
+            mongolian: "Хар",
+            pronunciation: "Khar",
+            ipa: "xar",
+            english: "Black",
+          },
+          {
+            mongolian: "Улаан",
+            pronunciation: "Ulaan",
+            ipa: "ulaːn",
+            english: "Red",
+          },
+          {
+            mongolian: "Цэнхэр",
+            pronunciation: "Tsenkher",
+            ipa: "tseŋxer",
+            english: "Blue",
+          },
+          {
+            mongolian: "Ногоон",
+            pronunciation: "Nogoon",
+            ipa: "nɔɡɔːn",
+            english: "Green",
+          },
+          {
+            mongolian: "Шар",
+            pronunciation: "Shar",
+            ipa: "ʃar",
+            english: "Yellow",
+          },
+          {
+            mongolian: "Хүрэн",
+            pronunciation: "Khüren",
+            ipa: "xuren",
+            english: "Brown",
+          },
+          {
+            mongolian: "Саарал",
+            pronunciation: "Saaral",
+            ipa: "saːral",
+            english: "Gray",
+          },
+          {
+            mongolian: "Ягаан",
+            pronunciation: "Yagaan",
+            ipa: "jaɡaːn",
+            english: "Pink",
+          },
+          {
+            mongolian: "Нэг",
+            pronunciation: "Neg",
+            ipa: "neɡ",
+            english: "One",
+          },
+          {
+            mongolian: "Хоёр",
+            pronunciation: "Khoyor",
+            ipa: "xɔjɔr",
+            english: "Two",
+          },
+          {
+            mongolian: "Гурав",
+            pronunciation: "Gurav",
+            ipa: "ɡurav",
+            english: "Three",
+          },
+          {
+            mongolian: "Дөрөв",
+            pronunciation: "Döröv",
+            ipa: "dɵrɵv",
+            english: "Four",
+          },
+          {
+            mongolian: "Тав",
+            pronunciation: "Tav",
+            ipa: "tav",
+            english: "Five",
+          },
+          {
+            mongolian: "Одоо",
+            pronunciation: "Odoo",
+            ipa: "ɔdɔː",
+            english: "Now",
+          },
+          {
+            mongolian: "Өчигдөр",
+            pronunciation: "Öchigdör",
+            ipa: "ɵtʃiɡdɵr",
+            english: "Yesterday",
+          },
+          {
+            mongolian: "Маргааш",
+            pronunciation: "Margaaш",
+            ipa: "marɡaːʃ",
+            english: "Tomorrow",
+          },
+          {
+            mongolian: "Өнөөдөр",
+            pronunciation: "Önöödör",
+            ipa: "ɵnɵːdɵr",
+            english: "Today",
+          },
+          {
+            mongolian: "Хот",
+            pronunciation: "Khot",
+            ipa: "xɔt",
+            english: "City",
+          },
+          {
+            mongolian: "Улс",
+            pronunciation: "Uls",
+            ipa: "uls",
+            english: "Country",
+          },
+          {
+            mongolian: "Хүн",
+            pronunciation: "Khün",
+            ipa: "xun",
+            english: "Person",
+          },
+          {
+            mongolian: "Найз",
+            pronunciation: "Naiz",
+            ipa: "naidz",
+            english: "Friend",
+          },
+          {
+            mongolian: "Гэр бүл",
+            pronunciation: "Ger bül",
+            ipa: "ɡer bul",
+            english: "Family",
+          },
+          {
+            mongolian: "Аав",
+            pronunciation: "Aav",
+            ipa: "aːv",
+            english: "Father",
+          },
+          {
+            mongolian: "Ээж",
+            pronunciation: "Eej",
+            ipa: "eːdʒ",
+            english: "Mother",
+          },
+          {
+            mongolian: "Хүү",
+            pronunciation: "Khüü",
+            ipa: "xuː",
+            english: "Son",
+          },
+          {
+            mongolian: "Охин",
+            pronunciation: "Okhin",
+            ipa: "ɔxin",
+            english: "Daughter",
+          },
+          {
+            mongolian: "Ах",
+            pronunciation: "Akh",
+            ipa: "ax",
+            english: "Older brother",
+          },
+          {
+            mongolian: "Эгч",
+            pronunciation: "Egch",
+            ipa: "eɡtʃ",
+            english: "Older sister",
+          },
+          {
+            mongolian: "Дүү",
+            pronunciation: "Düü",
+            ipa: "duː",
+            english: "Younger sibling",
+          },
+          {
+            mongolian: "Хүүхэд",
+            pronunciation: "Khüükhed",
+            ipa: "xuːxed",
+            english: "Child",
+          },
+          {
+            mongolian: "Залуу",
+            pronunciation: "Zaluu",
+            ipa: "zaluː",
+            english: "Young person",
+          },
+          {
+            mongolian: "Хөгшин",
+            pronunciation: "Khögshin",
+            ipa: "xɵɡʃin",
+            english: "Old person",
+          },
+          {
+            mongolian: "Эрэгтэй",
+            pronunciation: "Eregtei",
+            ipa: "ereɡtei",
+            english: "Man",
+          },
+          {
+            mongolian: "Эмэгтэй",
+            pronunciation: "Emegtei",
+            ipa: "emeɡtei",
+            english: "Woman",
+          },
+          {
+            mongolian: "Багш",
+            pronunciation: "Bagsh",
+            ipa: "baɡʃ",
+            english: "Teacher",
+          },
+          {
+            mongolian: "Сурагч",
+            pronunciation: "Suragch",
+            ipa: "suraɡtʃ",
+            english: "Student",
+          },
+          {
+            mongolian: "Эмч",
+            pronunciation: "Emch",
+            ipa: "emtʃ",
+            english: "Doctor",
+          },
+          {
+            mongolian: "Жолооч",
+            pronunciation: "Jolooch",
+            ipa: "dʒɔlɔːtʃ",
+            english: "Driver",
+          },
+          {
+            mongolian: "Худалдагч",
+            pronunciation: "Khudaldagch",
+            ipa: "xudaldəɡtʃ",
+            english: "Salesperson",
+          },
+          {
+            mongolian: "Зочин",
+            pronunciation: "Zochin",
+            ipa: "zɔtʃin",
+            english: "Guest",
+          },
+          {
+            mongolian: "Аялагч",
+            pronunciation: "Ayalagch",
+            ipa: "ajaləɡtʃ",
+            english: "Traveler",
+          },
+          {
+            mongolian: "Гадаадын хүн",
+            pronunciation: "Gadaadyn khün",
+            ipa: "ɡadaːdyn xun",
+            english: "Foreigner",
+          },
+          {
+            mongolian: "Монгол хүн",
+            pronunciation: "Mongol khün",
+            ipa: "mɔŋɡɔl xun",
+            english: "Mongolian person",
+          },
+          {
+            mongolian: "Хэл",
+            pronunciation: "Khel",
+            ipa: "xel",
+            english: "Language",
+          },
+          {
+            mongolian: "Монгол хэл",
+            pronunciation: "Mongol khel",
+            ipa: "mɔŋɡɔl xel",
+            english: "Mongolian language",
+          },
+          {
+            mongolian: "Англи хэл",
+            pronunciation: "Angli khel",
+            ipa: "aŋɡli xel",
+            english: "English language",
+          },
+          {
+            mongolian: "Ном",
+            pronunciation: "Nom",
+            ipa: "nɔm",
+            english: "Book",
+          },
+          {
+            mongolian: "Цаас",
+            pronunciation: "Taas",
+            ipa: "taːs",
+            english: "Paper",
+          },
+          {
+            mongolian: "Үзэг",
+            pronunciation: "Üzeg",
+            ipa: "uzəɡ",
+            english: "Pen",
+          },
+          {
+            mongolian: "Харандаа",
+            pronunciation: "Kharandaa",
+            ipa: "xarandaa",
+            english: "Pencil",
+          },
+          {
+            mongolian: "Хаяг",
+            pronunciation: "Khayag",
+            ipa: "xajəɡ",
+            english: "Address",
+          },
+          {
+            mongolian: "Утас",
+            pronunciation: "Utas",
+            ipa: "utas",
+            english: "Phone",
+          },
+          {
+            mongolian: "Компьютер",
+            pronunciation: "Kompyuter",
+            ipa: "kɔmpjuter",
+            english: "Computer",
+          },
+          {
+            mongolian: "Интернэт",
+            pronunciation: "Internet",
+            ipa: "internet",
+            english: "Internet",
+          },
+          {
+            mongolian: "Цахилгаан",
+            pronunciation: "Tsakhilgaan",
+            ipa: "tsaxilɡaːn",
+            english: "Electricity",
+          },
+          {
+            mongolian: "Ус",
+            pronunciation: "Us",
+            ipa: "ʊs",
+            english: "Water",
+          },
+          {
+            mongolian: "Хий",
+            pronunciation: "Khii",
+            ipa: "xiː",
+            english: "Air",
+          },
+          {
+            mongolian: "Гал",
+            pronunciation: "Gal",
+            ipa: "ɡal",
+            english: "Fire",
+          },
+          {
+            mongolian: "Газрын",
+            pronunciation: "Gazryn",
+            ipa: "ɡazrin",
+            english: "Earth",
+          },
+          {
+            mongolian: "Тэнгэр",
+            pronunciation: "Tenger",
+            ipa: "teŋɡer",
+            english: "Sky",
+          },
+          {
+            mongolian: "Нар",
+            pronunciation: "Nar",
+            ipa: "nar",
+            english: "Sun",
+          },
+          {
+            mongolian: "Сар",
+            pronunciation: "Sar",
+            ipa: "sar",
+            english: "Moon",
+          },
+          {
+            mongolian: "Од",
+            pronunciation: "Od",
+            ipa: "ɔd",
+            english: "Star",
+          },
+          {
+            mongolian: "Уур",
+            pronunciation: "Uur",
+            ipa: "uːr",
+            english: "Cloud",
+          },
+          {
+            mongolian: "Бороо",
+            pronunciation: "Boroo",
+            ipa: "bɔrɔː",
+            english: "Rain",
+          },
+          {
+            mongolian: "Цас",
+            pronunciation: "Tas",
+            ipa: "tas",
+            english: "Snow",
+          },
+          {
+            mongolian: "Салхи",
+            pronunciation: "Salkhi",
+            ipa: "salxi",
+            english: "Wind",
+          },
+          {
+            mongolian: "Уур амьсгал",
+            pronunciation: "Uur amisgal",
+            ipa: "uːr amisɡal",
+            english: "Weather",
+          },
+          {
+            mongolian: "Халуун",
+            pronunciation: "Khaluun",
+            ipa: "xaluːn",
+            english: "Hot",
+          },
+          {
+            mongolian: "Хүйтэн",
+            pronunciation: "Khüiten",
+            ipa: "xuiten",
+            english: "Cold",
+          },
+          {
+            mongolian: "Дулаан",
+            pronunciation: "Dulaan",
+            ipa: "dulaːn",
+            english: "Warm",
+          },
+          {
+            mongolian: "Сэрүүн",
+            pronunciation: "Serüün",
+            ipa: "seruːn",
+            english: "Cool",
+          },
+          {
+            mongolian: "Маргааш",
+            pronunciation: "Margaaш",
+            ipa: "marɡaːʃ",
+            english: "Tomorrow",
+          },
+          {
+            mongolian: "Өнөөдөр",
+            pronunciation: "Önöödör",
+            ipa: "ɵnɵːdɵr",
+            english: "Today",
+          },
+          {
+            mongolian: "Энд",
+            pronunciation: "End",
+            ipa: "end",
+            english: "Here",
+          },
+          {
+            mongolian: "Тэнд",
+            pronunciation: "Tend",
+            ipa: "tend",
+            english: "There",
+          },
+          {
+            mongolian: "Хаана",
+            pronunciation: "Khaana",
+            ipa: "xaːna",
+            english: "Where",
+          },
+          {
+            mongolian: "Хэзээ",
+            pronunciation: "Khezee",
+            ipa: "xezeː",
+            english: "When",
+          },
+          {
+            mongolian: "Яагаад",
+            pronunciation: "Yaagaad",
+            ipa: "jaːɡaːd",
+            english: "Why",
+          },
+          {
+            mongolian: "Юу",
+            pronunciation: "Yuu",
+            ipa: "juː",
+            english: "What",
+          },
+          {
+            mongolian: "Хэн",
+            pronunciation: "Khen",
+            ipa: "xen",
+            english: "Who",
+          },
+          {
+            mongolian: "Хэрхэн",
+            pronunciation: "Kherkhen",
+            ipa: "xerxen",
+            english: "How",
+          },
+          {
+            mongolian: "Хэдэн",
+            pronunciation: "Kheden",
+            ipa: "xeden",
+            english: "How many",
+          },
+          {
+            mongolian: "Хэд",
+            pronunciation: "Khed",
+            ipa: "xed",
+            english: "How much",
+          },
+          {
+            mongolian: "Энэ",
+            pronunciation: "Ene",
+            ipa: "ene",
+            english: "This",
+          },
+          {
+            mongolian: "Тэр",
+            pronunciation: "Ter",
+            ipa: "ter",
+            english: "That",
           },
         ],
         travelPhrases: [
@@ -749,6 +1418,180 @@
             ipa: "bi budʒiɡledʒ baina",
             english: "I am dancing",
           },
+          {
+            mongolian: "Би уншиж байна",
+            pronunciation: "Bi unshij baina",
+            ipa: "bi unʃidʒ baina",
+            english: "I am reading",
+          },
+          {
+            mongolian: "Би бичиж байна",
+            pronunciation: "Bi bichij baina",
+            ipa: "bi bitʃidʒ baina",
+            english: "I am writing",
+          },
+          {
+            mongolian: "Би ярьж байна",
+            pronunciation: "Bi yarij baina",
+            ipa: "bi jaridʒ baina",
+            english: "I am speaking",
+          },
+          {
+            mongolian: "Би бодож байна",
+            pronunciation: "Bi bodoj baina",
+            ipa: "bi bɔdɔdʒ baina",
+            english: "I am thinking",
+          },
+          {
+            mongolian: "Би мэдэж байна",
+            pronunciation: "Bi medej baina",
+            ipa: "bi mededʒ baina",
+            english: "I know",
+          },
+          {
+            mongolian: "Би мэдэхгүй байна",
+            pronunciation: "Bi medekhgüi baina",
+            ipa: "bi medexɡui baina",
+            english: "I don't know",
+          },
+          {
+            mongolian: "Би хүсэж байна",
+            pronunciation: "Bi khüsej baina",
+            ipa: "bi xusedʒ baina",
+            english: "I want",
+          },
+          {
+            mongolian: "Би хэрэгтэй",
+            pronunciation: "Bi kheregtei",
+            ipa: "bi xereɡtei",
+            english: "I need",
+          },
+          {
+            mongolian: "Би чадахгүй байна",
+            pronunciation: "Bi chadakhgüi baina",
+            ipa: "bi tʃadaxɡui baina",
+            english: "I can't",
+          },
+          {
+            mongolian: "Би чадна",
+            pronunciation: "Bi chadna",
+            ipa: "bi tʃadna",
+            english: "I can",
+          },
+          {
+            mongolian: "Би ойлгож байна",
+            pronunciation: "Bi oilgoj baina",
+            ipa: "bi ɔilɡɔdʒ baina",
+            english: "I understand",
+          },
+          {
+            mongolian: "Би тайлбарлаж өгнө үү?",
+            pronunciation: "Bi tailbarlaj ögnö üü?",
+            ipa: "bi tailbarladʒ ɵɡnɵ üː",
+            english: "Can you explain to me?",
+          },
+          {
+            mongolian: "Би дахин хэлнэ үү?",
+            pronunciation: "Bi dakhin khelne üü?",
+            ipa: "bi daxin xelne üː",
+            english: "Can you repeat that?",
+          },
+          {
+            mongolian: "Би удаан ярьна",
+            pronunciation: "Bi udaan yarina",
+            ipa: "bi udaːn jarina",
+            english: "Please speak slowly",
+          },
+          {
+            mongolian: "Би том үсгээр бичнэ үү?",
+            pronunciation: "Bi tom üsgeer bichne üü?",
+            ipa: "bi tɔm usɡeːr bitʃne üː",
+            english: "Can you write it in big letters?",
+          },
+          {
+            mongolian: "Би зөвхөн англи хэл мэднэ",
+            pronunciation: "Bi zövkhön angli khel medne",
+            ipa: "bi zɵvxɵn aŋɡli xel medne",
+            english: "I only speak English",
+          },
+          {
+            mongolian: "Би монгол хэл сурч байна",
+            pronunciation: "Bi mongol khel surch baina",
+            ipa: "bi mɔŋɡɔl xel surtʃ baina",
+            english: "I am learning Mongolian",
+          },
+          {
+            mongolian: "Би анх удаа ирж байна",
+            pronunciation: "Bi ankh udaa irj baina",
+            ipa: "bi aŋx udaː irdʒ baina",
+            english: "This is my first time here",
+          },
+          {
+            mongolian: "Би хэдэн хоног үлдэх вэ?",
+            pronunciation: "Bi kheden khonog üldekh ve?",
+            ipa: "bi xeden xɔnɔɡ üldex ve",
+            english: "How many days will I stay?",
+          },
+          {
+            mongolian: "Би маргааш явна",
+            pronunciation: "Bi margaaш yavna",
+            ipa: "bi marɡaːʃ javna",
+            english: "I will leave tomorrow",
+          },
+          {
+            mongolian: "Би өнөөдөр ирнэ",
+            pronunciation: "Bi önöödör irne",
+            ipa: "bi ɵnɵːdɵr irne",
+            english: "I will come today",
+          },
+          {
+            mongolian: "Би өчигдөр ирсэн",
+            pronunciation: "Bi öchigdör irsen",
+            ipa: "bi ɵtʃiɡdɵr irsen",
+            english: "I came yesterday",
+          },
+          {
+            mongolian: "Би одоо явна",
+            pronunciation: "Bi odoo yavna",
+            ipa: "bi ɔdɔː javna",
+            english: "I will go now",
+          },
+          {
+            mongolian: "Би энд үлдэнэ",
+            pronunciation: "Bi end üldene",
+            ipa: "bi end üldene",
+            english: "I will stay here",
+          },
+          {
+            mongolian: "Би тэнд явна",
+            pronunciation: "Bi tend yavna",
+            ipa: "bi tend javna",
+            english: "I will go there",
+          },
+          {
+            mongolian: "Би энэ хотод амьдарна",
+            pronunciation: "Bi ene khotod amidarna",
+            ipa: "bi ene xɔtɔd amidarna",
+            english: "I live in this city",
+          },
+          {
+            mongolian: "Би тэр хотод амьдарна",
+            pronunciation: "Bi ter khotod amidarna",
+            ipa: "bi ter xɔtɔd amidarna",
+            english: "I live in that city",
+          },
+          {
+            mongolian: "Би энэ улсад ирсэн",
+            pronunciation: "Bi ene ulsad irsen",
+            ipa: "bi ene ulsad irsen",
+            english: "I came to this country",
+          },
+          {
+            mongolian: "Би тэр улсад явна",
+            pronunciation: "Bi ter ulsad yavna",
+            ipa: "bi ter ulsad javna",
+            english: "I will go to that country",
+          },
         ],
         essentialVerbs: [
           {
@@ -912,6 +1755,222 @@
             present: "ойлгож байна",
             past: "ойлгосон",
             future: "ойлгох",
+          },
+          {
+            mongolian: "Мэдэх",
+            pronunciation: "Medekh",
+            ipa: "medex",
+            english: "To know",
+            present: "мэдэж байна",
+            past: "мэдсэн",
+            future: "мэдэх",
+          },
+          {
+            mongolian: "Хүсэх",
+            pronunciation: "Khüsekh",
+            ipa: "xusex",
+            english: "To want",
+            present: "хүсэж байна",
+            past: "хүссэн",
+            future: "хүсэх",
+          },
+          {
+            mongolian: "Хэрэгтэй",
+            pronunciation: "Kheregtei",
+            ipa: "xereɡtei",
+            english: "To need",
+            present: "хэрэгтэй байна",
+            past: "хэрэгтэй байсан",
+            future: "хэрэгтэй болно",
+          },
+          {
+            mongolian: "Чадах",
+            pronunciation: "Chadakh",
+            ipa: "tʃadax",
+            english: "To be able to",
+            present: "чаддаг",
+            past: "чадсан",
+            future: "чадна",
+          },
+          {
+            mongolian: "Бодох",
+            pronunciation: "Bodokh",
+            ipa: "bɔdɔx",
+            english: "To think",
+            present: "бодож байна",
+            past: "бодсон",
+            future: "бодох",
+          },
+          {
+            mongolian: "Хэлэх",
+            pronunciation: "Khelekh",
+            ipa: "xelex",
+            english: "To say",
+            present: "хэлж байна",
+            past: "хэлсэн",
+            future: "хэлэх",
+          },
+          {
+            mongolian: "Асуух",
+            pronunciation: "Asuukh",
+            ipa: "asuːx",
+            english: "To ask",
+            present: "асууж байна",
+            past: "асуусан",
+            future: "асуух",
+          },
+          {
+            mongolian: "Хариулах",
+            pronunciation: "Khariulakh",
+            ipa: "xariulax",
+            english: "To answer",
+            present: "хариулж байна",
+            past: "хариулсан",
+            future: "хариулах",
+          },
+          {
+            mongolian: "Тайлбарлах",
+            pronunciation: "Tailbarlakh",
+            ipa: "tailbarlax",
+            english: "To explain",
+            present: "тайлбарлаж байна",
+            past: "тайлбарласан",
+            future: "тайлбарлах",
+          },
+          {
+            mongolian: "Дахин хэлэх",
+            pronunciation: "Dakhin khelekh",
+            ipa: "daxin xelex",
+            english: "To repeat",
+            present: "дахин хэлж байна",
+            past: "дахин хэлсэн",
+            future: "дахин хэлэх",
+          },
+          {
+            mongolian: "Худалдах",
+            pronunciation: "Khudaldakh",
+            ipa: "xudaldax",
+            english: "To sell",
+            present: "худалдаж байна",
+            past: "худалдсан",
+            future: "худалдах",
+          },
+          {
+            mongolian: "Худалдан авах",
+            pronunciation: "Khudaldan avakh",
+            ipa: "xudaldan avax",
+            english: "To buy",
+            present: "худалдан авч байна",
+            past: "худалдан авсан",
+            future: "худалдан авах",
+          },
+          {
+            mongolian: "Амьдрах",
+            pronunciation: "Amidrakh",
+            ipa: "amidrax",
+            english: "To live",
+            present: "амьдарч байна",
+            past: "амьдарсан",
+            future: "амьдрах",
+          },
+          {
+            mongolian: "Үхэх",
+            pronunciation: "Ükhekh",
+            ipa: "uxex",
+            english: "To die",
+            present: "үхэж байна",
+            past: "үхсэн",
+            future: "үхэх",
+          },
+          {
+            mongolian: "Төрөх",
+            pronunciation: "Törökh",
+            ipa: "tɵrɵx",
+            english: "To be born",
+            present: "төрж байна",
+            past: "төрсөн",
+            future: "төрөх",
+          },
+          {
+            mongolian: "Өсөх",
+            pronunciation: "Ösökh",
+            ipa: "ɵsɵx",
+            english: "To grow",
+            present: "өсөж байна",
+            past: "өссөн",
+            future: "өсөх",
+          },
+          {
+            mongolian: "Хөгжих",
+            pronunciation: "Khögjikh",
+            ipa: "xɵɡdʒix",
+            english: "To develop",
+            present: "хөгжиж байна",
+            past: "хөгжсөн",
+            future: "хөгжих",
+          },
+          {
+            mongolian: "Өөрчлөх",
+            pronunciation: "Öörchlökh",
+            ipa: "ɵːrtʃlɵx",
+            english: "To change",
+            present: "өөрчилж байна",
+            past: "өөрчилсөн",
+            future: "өөрчлөх",
+          },
+          {
+            mongolian: "Эхлэх",
+            pronunciation: "Ekhlekh",
+            ipa: "exlex",
+            english: "To start",
+            present: "эхлэж байна",
+            past: "эхэлсэн",
+            future: "эхлэх",
+          },
+          {
+            mongolian: "Дуусах",
+            pronunciation: "Duusakh",
+            ipa: "duːsax",
+            english: "To finish",
+            present: "дуусч байна",
+            past: "дууссан",
+            future: "дуусах",
+          },
+          {
+            mongolian: "Хүлээх",
+            pronunciation: "Khüleekh",
+            ipa: "xuleːx",
+            english: "To wait",
+            present: "хүлээж байна",
+            past: "хүлээсэн",
+            future: "хүлээх",
+          },
+          {
+            mongolian: "Уулзах",
+            pronunciation: "Uulzakh",
+            ipa: "uːldzax",
+            english: "To meet",
+            present: "уулзаж байна",
+            past: "уулзсан",
+            future: "уулзах",
+          },
+          {
+            mongolian: "Сайн байх",
+            pronunciation: "Sain baikh",
+            ipa: "sain baix",
+            english: "To be well",
+            present: "сайн байна",
+            past: "сайн байсан",
+            future: "сайн байх",
+          },
+          {
+            mongolian: "Муу байх",
+            pronunciation: "Muu baikh",
+            ipa: "muː baix",
+            english: "To be bad",
+            present: "муу байна",
+            past: "муу байсан",
+            future: "муу байх",
           },
           {
             mongolian: "Хүсэх",
@@ -1226,6 +2285,452 @@
             pronunciation: "Chi minii az jargal",
             ipa: "tʃi miniː az dʒarɡal",
             english: "You are my happiness",
+          },
+          {
+            mongolian: "Би чамайг хайрлаж байна",
+            pronunciation: "Bi chamaig khairlaj baina",
+            ipa: "bi tʃamaig xairladʒ baina",
+            english: "I love you",
+          },
+          {
+            mongolian: "Чи миний хайрласан хүн",
+            pronunciation: "Chi minii khairlasan khün",
+            ipa: "tʃi miniː xairlasan xun",
+            english: "You are my beloved",
+          },
+          {
+            mongolian: "Би чамайг хүсэж байна",
+            pronunciation: "Bi chamaig khüsej baina",
+            ipa: "bi tʃamaig xusedʒ baina",
+            english: "I want you",
+          },
+          {
+            mongolian: "Чи миний хүсэл мөрөөдөл",
+            pronunciation: "Chi minii khüsel möröödöl",
+            ipa: "tʃi miniː xusel mɵrɵːdɵl",
+            english: "You are my dream",
+          },
+          {
+            mongolian: "Би чамайг хүндэтгэж байна",
+            pronunciation: "Bi chamaig khündetgej baina",
+            ipa: "bi tʃamaig xundetɡedʒ baina",
+            english: "I respect you",
+          },
+          {
+            mongolian: "Чи миний хүндэтгэсэн хүн",
+            pronunciation: "Chi minii khündetgesen khün",
+            ipa: "tʃi miniː xundetɡesen xun",
+            english: "You are my respected one",
+          },
+          {
+            mongolian: "Би чамайг хүндэлж байна",
+            pronunciation: "Bi chamaig khündelj baina",
+            ipa: "bi tʃamaig xundeldʒ baina",
+            english: "I cherish you",
+          },
+          {
+            mongolian: "Чи миний хүндэлсэн хүн",
+            pronunciation: "Chi minii khündelsen khün",
+            ipa: "tʃi miniː xundelsen xun",
+            english: "You are my cherished one",
+          },
+          {
+            mongolian: "Би чамайг хайрлаж байна",
+            pronunciation: "Bi chamaig khairlaj baina",
+            ipa: "bi tʃamaig xairladʒ baina",
+            english: "I love you",
+          },
+          {
+            mongolian: "Чи миний хайрласан хүн",
+            pronunciation: "Chi minii khairlasan khün",
+            ipa: "tʃi miniː xairlasan xun",
+            english: "You are my beloved",
+          },
+          {
+            mongolian: "Би чамайг хүсэж байна",
+            pronunciation: "Bi chamaig khüsej baina",
+            ipa: "bi tʃamaig xusedʒ baina",
+            english: "I want you",
+          },
+          {
+            mongolian: "Чи миний хүсэл мөрөөдөл",
+            pronunciation: "Chi minii khüsel möröödöl",
+            ipa: "tʃi miniː xusel mɵrɵːdɵl",
+            english: "You are my dream",
+          },
+          {
+            mongolian: "Би чамайг хүндэтгэж байна",
+            pronunciation: "Bi chamaig khündetgej baina",
+            ipa: "bi tʃamaig xundetɡedʒ baina",
+            english: "I respect you",
+          },
+          {
+            mongolian: "Чи миний хүндэтгэсэн хүн",
+            pronunciation: "Chi minii khündetgesen khün",
+            ipa: "tʃi miniː xundetɡesen xun",
+            english: "You are my respected one",
+          },
+          {
+            mongolian: "Би чамайг хүндэлж байна",
+            pronunciation: "Bi chamaig khündelj baina",
+            ipa: "bi tʃamaig xundeldʒ baina",
+            english: "I cherish you",
+          },
+          {
+            mongolian: "Чи миний хүндэлсэн хүн",
+            pronunciation: "Chi minii khündelsen khün",
+            ipa: "tʃi miniː xundelsen xun",
+            english: "You are my cherished one",
+          },
+          {
+            mongolian: "Би чамайг хайрлаж байна",
+            pronunciation: "Bi chamaig khairlaj baina",
+            ipa: "bi tʃamaig xairladʒ baina",
+            english: "I love you",
+          },
+          {
+            mongolian: "Чи миний хайрласан хүн",
+            pronunciation: "Chi minii khairlasan khün",
+            ipa: "tʃi miniː xairlasan xun",
+            english: "You are my beloved",
+          },
+          {
+            mongolian: "Би чамайг хүсэж байна",
+            pronunciation: "Bi chamaig khüsej baina",
+            ipa: "bi tʃamaig xusedʒ baina",
+            english: "I want you",
+          },
+          {
+            mongolian: "Чи миний хүсэл мөрөөдөл",
+            pronunciation: "Chi minii khüsel möröödöl",
+            ipa: "tʃi miniː xusel mɵrɵːdɵl",
+            english: "You are my dream",
+          },
+          {
+            mongolian: "Би чамайг хүндэтгэж байна",
+            pronunciation: "Bi chamaig khündetgej baina",
+            ipa: "bi tʃamaig xundetɡedʒ baina",
+            english: "I respect you",
+          },
+          {
+            mongolian: "Чи миний хүндэтгэсэн хүн",
+            pronunciation: "Chi minii khündetgesen khün",
+            ipa: "tʃi miniː xundetɡesen xun",
+            english: "You are my respected one",
+          },
+          {
+            mongolian: "Би чамайг хүндэлж байна",
+            pronunciation: "Bi chamaig khündelj baina",
+            ipa: "bi tʃamaig xundeldʒ baina",
+            english: "I cherish you",
+          },
+          {
+            mongolian: "Чи миний хүндэлсэн хүн",
+            pronunciation: "Chi minii khündelsen khün",
+            ipa: "tʃi miniː xundelsen xun",
+            english: "You are my cherished one",
+          },
+          {
+            mongolian: "Би чамайг хайрлаж байна",
+            pronunciation: "Bi chamaig khairlaj baina",
+            ipa: "bi tʃamaig xairladʒ baina",
+            english: "I love you",
+          },
+          {
+            mongolian: "Чи миний хайрласан хүн",
+            pronunciation: "Chi minii khairlasan khün",
+            ipa: "tʃi miniː xairlasan xun",
+            english: "You are my beloved",
+          },
+          {
+            mongolian: "Би чамайг хүсэж байна",
+            pronunciation: "Bi chamaig khüsej baina",
+            ipa: "bi tʃamaig xusedʒ baina",
+            english: "I want you",
+          },
+          {
+            mongolian: "Чи миний хүсэл мөрөөдөл",
+            pronunciation: "Chi minii khüsel möröödöl",
+            ipa: "tʃi miniː xusel mɵrɵːdɵl",
+            english: "You are my dream",
+          },
+          {
+            mongolian: "Би чамайг хүндэтгэж байна",
+            pronunciation: "Bi chamaig khündetgej baina",
+            ipa: "bi tʃamaig xundetɡedʒ baina",
+            english: "I respect you",
+          },
+          {
+            mongolian: "Чи миний хүндэтгэсэн хүн",
+            pronunciation: "Chi minii khündetgesen khün",
+            ipa: "tʃi miniː xundetɡesen xun",
+            english: "You are my respected one",
+          },
+          {
+            mongolian: "Би чамайг хүндэлж байна",
+            pronunciation: "Bi chamaig khündelj baina",
+            ipa: "bi tʃamaig xundeldʒ baina",
+            english: "I cherish you",
+          },
+          {
+            mongolian: "Чи миний хүндэлсэн хүн",
+            pronunciation: "Chi minii khündelsen khün",
+            ipa: "tʃi miniː xundelsen xun",
+            english: "You are my cherished one",
+          },
+        ],
+        culturalPhrases: [
+          {
+            mongolian: "Сайн байна уу",
+            pronunciation: "Sain baina uu",
+            ipa: "sain baina uː",
+            english: "How are you? (Traditional greeting)",
+          },
+          {
+            mongolian: "Сайхан байна уу",
+            pronunciation: "Saikhan baina uu",
+            ipa: "saixan baina uː",
+            english: "Are you well?",
+          },
+          {
+            mongolian: "Баяртай",
+            pronunciation: "Bayartai",
+            ipa: "bajartai",
+            english: "Goodbye (Traditional farewell)",
+          },
+          {
+            mongolian: "Баярлалаа",
+            pronunciation: "Bayarlalaa",
+            ipa: "bajarlalaː",
+            english: "Thank you (Traditional)",
+          },
+          {
+            mongolian: "Уучлаарай",
+            pronunciation: "Uuchlaarai",
+            ipa: "uːtʃlaːrai",
+            english: "Sorry/Excuse me",
+          },
+          {
+            mongolian: "Би ойлгохгүй байна",
+            pronunciation: "Bi oilgokhgüi baina",
+            ipa: "bi ɔilɡɔxɡui baina",
+            english: "I don't understand",
+          },
+          {
+            mongolian: "Та монгол хэл мэдэх үү?",
+            pronunciation: "Ta mongol khel medekh üü?",
+            ipa: "ta mɔŋɡɔl xel medex üː",
+            english: "Do you speak Mongolian?",
+          },
+          {
+            mongolian: "Би монгол хэл сурч байна",
+            pronunciation: "Bi mongol khel surch baina",
+            ipa: "bi mɔŋɡɔl xel surtʃ baina",
+            english: "I am learning Mongolian",
+          },
+          {
+            mongolian: "Би гадаадын хүн",
+            pronunciation: "Bi gadaadyn khün",
+            ipa: "bi ɡadaːdyn xun",
+            english: "I am a foreigner",
+          },
+          {
+            mongolian: "Би анх удаа ирж байна",
+            pronunciation: "Bi ankh udaa irj baina",
+            ipa: "bi aŋx udaː irdʒ baina",
+            english: "This is my first time here",
+          },
+          {
+            mongolian: "Монгол улс сайхан",
+            pronunciation: "Mongol uls saikhan",
+            ipa: "mɔŋɡɔl uls saixan",
+            english: "Mongolia is beautiful",
+          },
+          {
+            mongolian: "Монгол хүмүүс сайн",
+            pronunciation: "Mongol khümüüs sain",
+            ipa: "mɔŋɡɔl xumuːs sain",
+            english: "Mongolian people are good",
+          },
+          {
+            mongolian: "Би монгол хэл дуртай",
+            pronunciation: "Bi mongol khel durtai",
+            ipa: "bi mɔŋɡɔl xel durtai",
+            english: "I like Mongolian language",
+          },
+          {
+            mongolian: "Монгол хэл хэцүү",
+            pronunciation: "Mongol khel khetsüü",
+            ipa: "mɔŋɡɔl xel xetsuː",
+            english: "Mongolian language is difficult",
+          },
+          {
+            mongolian: "Би монгол хэл сурч байна",
+            pronunciation: "Bi mongol khel surch baina",
+            ipa: "bi mɔŋɡɔl xel surtʃ baina",
+            english: "I am studying Mongolian",
+          },
+          {
+            mongolian: "Та надад тусална уу?",
+            pronunciation: "Ta nadad tusaluu uu?",
+            ipa: "ta nadad tusaluː uː",
+            english: "Can you help me?",
+          },
+          {
+            mongolian: "Би танд туслая",
+            pronunciation: "Bi tand tuslaya",
+            ipa: "bi tand tuslaja",
+            english: "I will help you",
+          },
+          {
+            mongolian: "Баярлалаа",
+            pronunciation: "Bayarlalaa",
+            ipa: "bajarlalaː",
+            english: "Thank you",
+          },
+          {
+            mongolian: "Уучлаарай",
+            pronunciation: "Uuchlaarai",
+            ipa: "uːtʃlaːrai",
+            english: "Sorry",
+          },
+          {
+            mongolian: "Би ойлгож байна",
+            pronunciation: "Bi oilgoj baina",
+            ipa: "bi ɔilɡɔdʒ baina",
+            english: "I understand",
+          },
+          {
+            mongolian: "Би ойлгохгүй байна",
+            pronunciation: "Bi oilgokhgüi baina",
+            ipa: "bi ɔilɡɔxɡui baina",
+            english: "I don't understand",
+          },
+          {
+            mongolian: "Та дахин хэлнэ үү?",
+            pronunciation: "Ta dakhin khelne üü?",
+            ipa: "ta daxin xelne üː",
+            english: "Can you repeat that?",
+          },
+          {
+            mongolian: "Би удаан ярьна",
+            pronunciation: "Bi udaan yarina",
+            ipa: "bi udaːn jarina",
+            english: "Please speak slowly",
+          },
+          {
+            mongolian: "Би том үсгээр бичнэ үү?",
+            pronunciation: "Bi tom üsgeer bichne üü?",
+            ipa: "bi tɔm usɡeːr bitʃne üː",
+            english: "Can you write it in big letters?",
+          },
+          {
+            mongolian: "Би зөвхөн англи хэл мэднэ",
+            pronunciation: "Bi zövkhön angli khel medne",
+            ipa: "bi zɵvxɵn aŋɡli xel medne",
+            english: "I only speak English",
+          },
+          {
+            mongolian: "Би монгол хэл сурч байна",
+            pronunciation: "Bi mongol khel surch baina",
+            ipa: "bi mɔŋɡɔl xel surtʃ baina",
+            english: "I am learning Mongolian",
+          },
+          {
+            mongolian: "Би анх удаа ирж байна",
+            pronunciation: "Bi ankh udaa irj baina",
+            ipa: "bi aŋx udaː irdʒ baina",
+            english: "This is my first time here",
+          },
+          {
+            mongolian: "Монгол улс сайхан",
+            pronunciation: "Mongol uls saikhan",
+            ipa: "mɔŋɡɔl uls saixan",
+            english: "Mongolia is beautiful",
+          },
+          {
+            mongolian: "Монгол хүмүүс сайн",
+            pronunciation: "Mongol khümüüs sain",
+            ipa: "mɔŋɡɔl xumuːs sain",
+            english: "Mongolian people are good",
+          },
+          {
+            mongolian: "Би монгол хэл дуртай",
+            pronunciation: "Bi mongol khel durtai",
+            ipa: "bi mɔŋɡɔl xel durtai",
+            english: "I like Mongolian language",
+          },
+          {
+            mongolian: "Монгол хэл хэцүү",
+            pronunciation: "Mongol khel khetsüü",
+            ipa: "mɔŋɡɔl xel xetsuː",
+            english: "Mongolian language is difficult",
+          },
+          {
+            mongolian: "Би монгол хэл сурч байна",
+            pronunciation: "Bi mongol khel surch baina",
+            ipa: "bi mɔŋɡɔl xel surtʃ baina",
+            english: "I am studying Mongolian",
+          },
+          {
+            mongolian: "Та надад тусална уу?",
+            pronunciation: "Ta nadad tusaluu uu?",
+            ipa: "ta nadad tusaluː uː",
+            english: "Can you help me?",
+          },
+          {
+            mongolian: "Би танд туслая",
+            pronunciation: "Bi tand tuslaya",
+            ipa: "bi tand tuslaja",
+            english: "I will help you",
+          },
+          {
+            mongolian: "Баярлалаа",
+            pronunciation: "Bayarlalaa",
+            ipa: "bajarlalaː",
+            english: "Thank you",
+          },
+          {
+            mongolian: "Уучлаарай",
+            pronunciation: "Uuchlaarai",
+            ipa: "uːtʃlaːrai",
+            english: "Sorry",
+          },
+          {
+            mongolian: "Би ойлгож байна",
+            pronunciation: "Bi oilgoj baina",
+            ipa: "bi ɔilɡɔdʒ baina",
+            english: "I understand",
+          },
+          {
+            mongolian: "Би ойлгохгүй байна",
+            pronunciation: "Bi oilgokhgüi baina",
+            ipa: "bi ɔilɡɔxɡui baina",
+            english: "I don't understand",
+          },
+          {
+            mongolian: "Та дахин хэлнэ үү?",
+            pronunciation: "Ta dakhin khelne üü?",
+            ipa: "ta daxin xelne üː",
+            english: "Can you repeat that?",
+          },
+          {
+            mongolian: "Би удаан ярьна",
+            pronunciation: "Bi udaan yarina",
+            ipa: "bi udaːn jarina",
+            english: "Please speak slowly",
+          },
+          {
+            mongolian: "Би том үсгээр бичнэ үү?",
+            pronunciation: "Bi tom üsgeer bichne üü?",
+            ipa: "bi tɔm usɡeːr bitʃne üː",
+            english: "Can you write it in big letters?",
+          },
+          {
+            mongolian: "Би зөвхөн англи хэл мэднэ",
+            pronunciation: "Bi zövkhön angli khel medne",
+            ipa: "bi zɵvxɵn aŋɡli xel medne",
+            english: "I only speak English",
           },
         ],
       };

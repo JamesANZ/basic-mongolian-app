@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   renderEssentialVerbs();
   renderTravelVocabulary();
   renderRomanticPhrases();
+  renderCulturalPhrases();
   setupEventListeners();
 });
 
@@ -258,6 +259,33 @@ function renderRomanticPhrases() {
   });
 }
 
+// Render cultural phrases section
+function renderCulturalPhrases() {
+  const container = document.getElementById("culturalPhrasesGrid");
+  container.innerHTML = "";
+
+  mongolianData.culturalPhrases.forEach((phrase) => {
+    const card = document.createElement("div");
+    card.className = "phrase-card";
+    card.innerHTML = `
+            <div class="card-image">🏛️</div>
+            <div class="card-content">
+                <h3>${phrase.mongolian}</h3>
+                <p class="pronunciation">${phrase.pronunciation}</p>
+                <p class="ipa">[${phrase.ipa}]</p>
+                <p class="english">${phrase.english}</p>
+                <div class="speak-indicator">🔊 Click to hear</div>
+            </div>
+        `;
+
+    // Make entire card clickable
+    card.addEventListener("click", () => speak(phrase.pronunciation));
+    card.style.cursor = "pointer";
+
+    container.appendChild(card);
+  });
+}
+
 // Speech synthesis function
 function speak(text) {
   if ("speechSynthesis" in window) {
@@ -407,6 +435,16 @@ function startQuiz() {
       ],
     })),
     ...mongolianData.romanticPhrases.map((item) => ({
+      question: `What does "${item.mongolian}" mean?`,
+      correct: item.english,
+      options: [
+        item.english,
+        item.pronunciation,
+        item.ipa,
+        "None of the above",
+      ],
+    })),
+    ...mongolianData.culturalPhrases.map((item) => ({
       question: `What does "${item.mongolian}" mean?`,
       correct: item.english,
       options: [

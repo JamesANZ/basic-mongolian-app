@@ -17,12 +17,15 @@ A comprehensive, interactive web application for learning Mongolian language bas
 ## 🚀 Getting Started
 
 ### Option 1: Direct Browser Opening (Recommended)
+
 1. Download or clone this repository
 2. Simply open `public/index.html` in any modern web browser
 3. Start learning Mongolian immediately!
 
 ### Option 2: Local Server (Optional)
+
 If you prefer to serve it locally:
+
 ```bash
 # Using Python 3
 python -m http.server 8000
@@ -120,6 +123,7 @@ You can easily deploy this app to any static hosting service:
 ## 🤝 Contributing
 
 Feel free to contribute by:
+
 - Adding more Mongolian content
 - Improving the UI/UX
 - Adding new features
