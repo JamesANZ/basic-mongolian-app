@@ -377,8 +377,9 @@ function showPronunciationFallback(text) {
 
 // Quiz functions
 function startQuiz() {
-  // Combine all data for quiz questions
+  // Combine all data for quiz questions with better question types
   const allData = [
+    // Alphabet questions - ask for pronunciation
     ...mongolianData.alphabet.cyrillic.map((item) => ({
       question: `What is the pronunciation of "${item.letter}"?`,
       correct: item.pronunciation,
@@ -389,16 +390,20 @@ function startQuiz() {
         "None of the above",
       ],
     })),
+
+    // Numbers questions - ask for pronunciation
     ...mongolianData.numbers.map((item) => ({
-      question: `How do you say "${item.english}" in Mongolian?`,
+      question: `How do you pronounce "${item.mongolian}" (${item.english})?`,
       correct: item.pronunciation,
       options: [
         item.pronunciation,
-        item.mongolian,
         item.ipa,
+        `"${item.mongolian}"`,
         "None of the above",
       ],
     })),
+
+    // Basic words questions - ask for meaning
     ...mongolianData.basicWords.map((item) => ({
       question: `What does "${item.mongolian}" mean?`,
       correct: item.english,
@@ -409,31 +414,39 @@ function startQuiz() {
         "None of the above",
       ],
     })),
+
+    // Travel phrases questions - ask for pronunciation
     ...mongolianData.travelPhrases.map((item) => ({
-      question: `Translate: "${item.english}"`,
+      question: `How do you pronounce "${item.mongolian}" (${item.english})?`,
       correct: item.pronunciation,
       options: [
         item.pronunciation,
-        item.mongolian,
         item.ipa,
+        `"${item.mongolian}"`,
         "None of the above",
       ],
     })),
+
+    // Verbs questions - ask for present tense
     ...mongolianData.essentialVerbs.map((item) => ({
-      question: `What is the present tense of "${item.mongolian}"?`,
+      question: `What is the present tense of "${item.mongolian}" (${item.english})?`,
       correct: item.present,
       options: [item.present, item.past, item.future, "None of the above"],
     })),
+
+    // Travel vocabulary questions - ask for pronunciation
     ...mongolianData.travelVocabulary.map((item) => ({
-      question: `What is "${item.english}" in Mongolian?`,
+      question: `How do you pronounce "${item.mongolian}" (${item.english})?`,
       correct: item.pronunciation,
       options: [
         item.pronunciation,
-        item.mongolian,
         item.ipa,
+        `"${item.mongolian}"`,
         "None of the above",
       ],
     })),
+
+    // Romantic phrases questions - ask for meaning
     ...mongolianData.romanticPhrases.map((item) => ({
       question: `What does "${item.mongolian}" mean?`,
       correct: item.english,
@@ -444,6 +457,8 @@ function startQuiz() {
         "None of the above",
       ],
     })),
+
+    // Cultural phrases questions - ask for meaning
     ...mongolianData.culturalPhrases.map((item) => ({
       question: `What does "${item.mongolian}" mean?`,
       correct: item.english,
@@ -456,8 +471,43 @@ function startQuiz() {
     })),
   ];
 
-  // Shuffle and select 10 questions
-  questions = allData.sort(() => Math.random() - 0.5).slice(0, 10);
+  // Create additional question types for variety
+  const additionalQuestions = [
+    // Reverse questions - ask for Mongolian from English
+    ...mongolianData.basicWords.slice(0, 20).map((item) => ({
+      question: `What is "${item.english}" in Mongolian?`,
+      correct: item.mongolian,
+      options: [
+        item.mongolian,
+        item.pronunciation,
+        item.ipa,
+        "None of the above",
+      ],
+    })),
+
+    // Number recognition questions
+    ...mongolianData.numbers.slice(0, 15).map((item) => ({
+      question: `What number is "${item.mongolian}"?`,
+      correct: item.english,
+      options: [
+        item.english,
+        item.pronunciation,
+        item.ipa,
+        "None of the above",
+      ],
+    })),
+
+    // Verb conjugation questions
+    ...mongolianData.essentialVerbs.slice(0, 10).map((item) => ({
+      question: `What is the past tense of "${item.mongolian}" (${item.english})?`,
+      correct: item.past,
+      options: [item.present, item.past, item.future, "None of the above"],
+    })),
+  ];
+
+  // Combine all questions and shuffle
+  const allQuestions = [...allData, ...additionalQuestions];
+  questions = allQuestions.sort(() => Math.random() - 0.5).slice(0, 15);
   currentQuestion = 0;
   score = 0;
 
@@ -508,11 +558,25 @@ function selectAnswer(selected) {
     }
   });
 
-  // Show result message
+  // Show result message with more helpful feedback
   const resultText = document.getElementById("resultText");
-  resultText.textContent = isCorrect
-    ? "✅ Correct! Well done!"
-    : `❌ Incorrect. The correct answer is: ${question.correct}`;
+  if (isCorrect) {
+    resultText.textContent = "✅ Correct! Well done!";
+  } else {
+    // Provide more context based on question type
+    if (question.question.includes("pronunciation")) {
+      resultText.textContent = `❌ Incorrect. The correct pronunciation is: ${question.correct}`;
+    } else if (question.question.includes("mean")) {
+      resultText.textContent = `❌ Incorrect. The correct meaning is: ${question.correct}`;
+    } else if (
+      question.question.includes("present tense") ||
+      question.question.includes("past tense")
+    ) {
+      resultText.textContent = `❌ Incorrect. The correct form is: ${question.correct}`;
+    } else {
+      resultText.textContent = `❌ Incorrect. The correct answer is: ${question.correct}`;
+    }
+  }
   resultText.className = `quiz-result ${isCorrect ? "correct" : "incorrect"}`;
   document.getElementById("quizResult").style.display = "block";
 
